@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Quieres ser mi novia?</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e7, #ffb6c1, #ffc0cb);
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      animation: fadeIn 3s ease-in-out;
+    }
+    .frase {
+      font-size: 1.1em;
+      color: #fffafc;
+      font-style: italic;
+      margin-bottom: 40px;
+      animation: fadeIn 3s ease-in-out;
+    }
+    button {
+      background-color: #fff;
+      color: #ff69b4;
+      border: none;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 30px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ffe4e1;
+      transform: scale(1.05);
+    }
+    #respuesta {
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #fff;
+      animation: fadeIn 1s ease-in-out;
+    }
+    a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      position: relative;
+    }
+    a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      bottom: -2px;
+      left: 0;
+      background: #ff69b4;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes floatHearts {
+      0% {transform: translateY(0) scale(1); opacity: 1;}
+      100% {transform: translateY(-600px) scale(1.5); opacity: 0;}
+    }
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: #fff;
+      font-size: 24px;
+      animation: floatHearts 6s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <h1>¿Quieres ser mi novia? 💖</h1>
+  <p class="frase">Hay personas que llegan y hacen que todo valga la pena ✨</p>
+  <div>
+    <button onclick="responder('si')">Sí, quiero 💖</button>
+    <button onclick="responder('calma')">Dímelo con calma 💭</button>
+  </div>
+  <div id="respuesta"></div>
+
+  <script>
+    function responder(opcion) {
+      const respuesta = document.getElementById('respuesta');
+      if (opcion === 'si') {
+        respuesta.innerHTML = 'Gracias por decirme que sí 💕 <a href="https://wa.me/573112182465?text=¡Dije%20que%20sí!%20💖" target="_blank">Mándame esta respuesta por WhatsApp 💌</a>';
+      } else if (opcion === 'calma') {
+        respuesta.innerHTML = 'Está bien 💭 <a href="https://wa.me/573112182465?text=Lo%20pensaré%20mejor%20💭" target="_blank">Mándame enseguida que lo pensarás 💭</a>';
+      }
+      crearCorazones();
+    }
+
+    function crearCorazones() {
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+      }
+    }
+  </script>
+</body>
+</html>
