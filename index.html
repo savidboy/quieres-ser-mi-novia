@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Querida Sheyla 🤍</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,700;1,900&family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fff9f7;
+      --card: #ffffff;
+      --accent: #ff6b81;
+      --muted: #7a5a5a;
+      --ink: #382f2f;
+      --radius: 18px;
+      --maxwidth: 980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #fffaf6 0%, #fff8f2 60%);
+      font-family: 'Quicksand', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--ink);
+      padding:28px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .wrap{
+      width:100%;
+      max-width:var(--maxwidth);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.99));
+      border-radius:20px;
+      box-shadow: 0 12px 50px rgba(56,43,43,0.08);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .wrap::before, .wrap::after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      opacity:0.05;
+      pointer-events:none;
+    }
+    .wrap::before{ right:-60px; top:-80px; background: radial-gradient(circle at 30% 30%, #ffdfe6, transparent 40%); }
+    .wrap::after{ left:-70px; bottom:-90px; background: radial-gradient(circle at 70% 70%, #fff1f3, transparent 40%); }
+
+    header{text-align:center;margin-bottom:12px}
+    .lead{ font-size:15px; color:var(--muted); margin-bottom:6px; font-style:italic; }
+    h1{ font-family: 'Great Vibes', cursive; font-size:56px; margin:6px 0 0 0; color:#6a333a; }
+    .meta{ color:var(--muted); font-size:13px; margin-top:6px; }
+
+    /* CONTENIDO: layout con scroll natural (una sola página) */
+    main{ margin-top:18px; display:grid; grid-template-columns: 1fr 340px; gap:20px; padding-right:8px; }
+    .content{ min-width:0; max-height:72vh; overflow:auto; padding-right:12px; } /* aquí se hace el scroll vertical */
+    .card{ background:var(--card); border-radius:16px; padding:20px; box-shadow: 0 6px 20px rgba(56,43,43,0.04); margin-bottom:16px; line-height:1.6; position:relative; }
+    h2{ font-family: 'Playfair Display', serif; font-size:20px; margin:0 0 8px 0; color:#5b3336; }
+    p{ margin:10px 0; color:var(--ink); font-size:15px; }
+    .quote{ border-left:4px solid var(--accent); padding-left:12px; margin:12px 0; font-style:italic; color:#5a4042; background: linear-gradient(90deg, rgba(255,107,129,0.03), rgba(255,200,210,0.02)); border-radius:8px; padding:12px; }
+    ul{ margin:8px 0 8px 20px; } li{ margin:6px 0; }
+    aside{ min-width:0; position:sticky; top:28px; align-self:start; max-height:72vh; overflow:auto; } /* aside fijo con scroll si hace falta */
+    .card.side{ display:flex; flex-direction:column; gap:10px; align-items:center; text-align:center; padding:18px; }
+    .avatar{ width:120px; height:120px; border-radius:999px; background:linear-gradient(180deg,#fff,#fff0); display:flex; align-items:center; justify-content:center; font-size:48px; box-shadow:0 8px 20px rgba(106,51,58,0.06); }
+    .tiny{ color:var(--muted); font-size:13px; line-height:1.3; }
+    .hearts{ display:flex; gap:10px; margin-top:8px; } .heart{ width:44px; height:44px; border-radius:10px; display:inline-grid; place-items:center; border:1px solid rgba(106,51,58,0.06); font-size:20px; color:var(--accent); }
+    footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
+    .signature{ margin-top:8px; font-weight:700; color:#4a2b2d; font-size:15px; }
+
+    @media (max-width:880px){ main{ grid-template-columns: 1fr; } .avatar{ width:96px; height:96px; font-size:40px; } }
+    strong{ color:#4c2226; } em{ font-style:italic; color:#5e3f41; }
+
+    .nav-pages{ display:none; } /* quitados botones numerados según pediste */
+
+    /* game small styles - simplificado para no añadir detalles tecnicos */
+    .canvas-container { padding: 12px; border-radius: 16px; background: #fff; box-shadow: 0 6px 20px rgba(56,43,43,0.04); }
+    canvas#gameCanvas{ width:100%; height:auto; display:block; border-radius:8px; background:linear-gradient(180deg,#fff6f8,#fff0f2); box-shadow:0 8px 20px rgba(0,0,0,0.04); }
+    .controls{ display:flex; gap:8px; justify-content:center; margin-top:8px; flex-wrap: wrap;} /* Añadido flex-wrap */
+    .btn{ padding:8px 12px; border-radius:999px; border:1px solid rgba(56,43,43,0.06); background:white; cursor:pointer; font-weight:600; }
+    .small{ font-size:13px; color:var(--muted); }
+
+    /* Estilos para los botones de control táctil (solo visible en pantallas pequeñas) */
+    .touch-controls { display: none; justify-content: center; gap: 10px; margin-top: 10px; }
+    .touch-btn { width: 60px; height: 60px; border-radius: 50%; background: #ff6b81; color: white; border: none; font-size: 24px; font-weight: bold; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; user-select: none; touch-action: manipulation; }
+    .touch-btn.jump { width: 80px; height: 80px; background: #884d4d; }
+    
+    /* Indicador de Power-Up */
+    #powerup-status { font-size: 13px; color: #ff6b81; font-weight: 700; margin-left: 10px; }
+
+    /* Modal de secreto (página) */
+    #secretModal{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(0.9); min-width:260px; max-width:90%; padding:18px; background:linear-gradient(180deg,#fff,#fff9f7); border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,0.25); opacity:0; pointer-events:none; transition:all .22s ease; z-index:1000; text-align:center; }
+    #secretModal.visible{ opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1); }
+    #secretModal h3{ margin:6px 0 10px 0; font-family:'Great Vibes',cursive; font-size:28px; color:#6a333a;}
+    #secretModal p{ margin:8px 0; font-weight:700; color:#5b3336;}
+    #secretModal button{ margin-top:10px; padding:8px 12px; border-radius:999px; border:1px solid rgba(56,43,43,0.06); background:white; cursor:pointer; font-weight:700; }
+
+    /* Overlay ligero detrás del modal */
+    #secretOverlay{ position:fixed; inset:0; background:rgba(0,0,0,0.18); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:999; }
+    #secretOverlay.visible{ opacity:1; pointer-events:auto; }
+
+    /* estilos de los secretos en la página (pequeños y sutiles) */
+    .page-secret { position: absolute; background: transparent; border: none; font-size:20px; cursor:pointer; transform: translate(-50%,-50%); opacity:0.9; }
+    .page-secret.hidden { opacity:0.6; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.06)); }
+    .page-secret:focus{ outline:2px solid rgba(255,107,129,0.2); border-radius:12px; }
+
+    @media (max-width: 600px) {
+        .touch-controls { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="article" aria-label="Carta para Sheyla">
+    <header>
+      <div class="lead">Todo lo que siento por ti, guardadito para que lo recuerdes 🤍</div>
+      <h1>Querida Sheyla 🤍</h1>
+      <div class="meta">01/16/2025</div>
+    </header>
+
+    <main>
+      <!-- CONTENIDO PRINCIPAL: todo visible en orden vertical -->
+      <section class="content" id="content">
+        <!-- page-1 -->
+        <article class="card" id="page-1" aria-labelledby="intro-title">
+          <h2 id="intro-title">Introducción — esto es todo lo que guardé</h2>
+          <p>Desde el día en que te conocí (ese 16 de enero que ahora parece una fecha con magia), guardé en mi cabeza y en pequeñas notas todo lo que sentía. Esto no es algo improvisado: es un pedazo de mi tiempo, pensado para ti, para que lo lees cuando quieras y recuerdes cómo me pongo cuando pienso en ti.</p>
+          <p>No es un texto perfecto ni una carta de novela; es mi voz con errores, con risas raras (<em>JSAKJSKAJKSA</em>) y con la verdad al desnudo. Si alguna frase suena torpe, es porque es sincera. Si alguna suena intensa, es porque así me sentí. Y si algo te hace sonrojar, es parte del plan.</p>
+          <!-- secreto en la página (no en el juego) -->
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:88%; top:22%;">🤍</button>
+        </article>
+
+        <!-- page-2 -->
+        <article class="card" id="page-2" aria-labelledby="primera-title">
+          <h2 id="primera-title">La primera vez que te vi</h2>
+          <p>Recuerdo ese momento como si fuera una foto medio borrosa pero con el color más fuerte: te vi con curiosidad en la mirada, preguntando cosas, y esa forma tuya de interesarte me atrapó. No había planes, solo una sensación rara en el pecho que ahora entiendo mejor.</p>
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:82%; top:66%;">🤍</button>
+        </article>
+
+        <!-- page-3 -->
+        <article class="card" id="page-3" aria-labelledby="equivoco-title">
+          <h2 id="equivoco-title">En qué me equivoqué (y por qué me río de eso)</h2>
+          <p>Hubo muchas cosas que pensé mal al principio. Creí que sería otra cosa pasajera, que quizá solo serías una amiga más. Me dio miedo confesar lo que sentía por miedo a perder lo que ya teníamos; así que me escondí detrás de bromas, mensajes y silencios.</p>
+        </article>
+
+        <!-- page-4 -->
+        <article class="card" id="page-4" aria-labelledby="valoro-title">
+          <h2 id="valoro-title">Lo que más valoro de nosotros</h2>
+          <p>Valoro la sinceridad, esa que no necesita adornos. Valoro cuando me miras con esa calma que parece decir “todo va a estar bien”. Valoro que no dejemos que una pelea sea el final, sino la oportunidad de entendernos mejor.</p>
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:14%; top:24%;">🤍</button>
+        </article>
+
+        <!-- page-5 -->
+        <article class="card" id="page-5" aria-labelledby="siento-title">
+          <h2 id="siento-title">Lo que siento contigo</h2>
+          <p>Lo que siento es casi imposible de explicar sin sonar dramático: ganas de cuidarte, de protegerte, pero también de compartir momentos chiquitos que, al final, son los que más cuentan. No quiero que suene intenso porque sí; es que realmente me importa todo lo que te pasa.</p>
+          <div class="quote">Eres mi mejor elección. Y lo diré así, simple y claro.</div>
+        </article>
+
+        <!-- page-6 -->
+        <article class="card" id="page-6" aria-labelledby="futuro-title">
+          <h2 id="futuro-title">Nuestro futuro (lo que imagino)</h2>
+          <p>Cuando imagino el futuro, no veo castillos ni grandes promesas de película; imagino rutinas contigo: desayunos desordenados, días donde trabajamos y nos contamos el error del día, y noches donde reímos hasta quedarnos dormidos. Eso para mí ya es mucho.</p>
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:50%; top:18%;">🤍</button>
+        </article>
+
+        <!-- page-7 -->
+        <article class="card" id="page-7" aria-labelledby="promesas-title">
+          <h2 id="promesas-title">Promesas (promesas con intención)</h2>
+          <ul>
+            <li>Prometo cuidarte y pedir ayuda cuando no alcance mi fuerza.</li>
+            <li>Prometo preocuparme por tu salud y tu paz más que por mi orgullo.</li>
+            <li>Prometo ser leal: en acciones pequeñas y grandes.</li>
+            <li>Prometo aprender a comunicarme mejor, a decir cuando me siento mal en vez de cerrarme.</li>
+            <li>Prometo intentarlo siempre, aunque falle, porque mi intención será regresar y corregir.</li>
+          </ul>
+        </article>
+
+        <!-- page-8 -->
+        <article class="card" id="page-8" aria-labelledby="gracias-title">
+          <h2 id="gracias-title">Gracias por…</h2>
+          <p>Gracias por elegir quedarte, incluso en momentos donde no me cuidé. Gracias por no alejarte al conocer mi pasado; gracias por darme la oportunidad de ser alguien distinto junto a ti.</p>
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:84%; top:42%;">🤍</button>
+        </article>
+
+        <!-- page-9: juego + canción -->
+        <article class="card" id="page-9" aria-labelledby="cancion-title">
+          <h2 id="cancion-title">Nuestra canción + Jueguito</h2>
+          <p>Hay una melodía que, sin decir mucho, siempre me trae a ti. No hablo de versos ni de frases; hablo de esa sensación que me da escuchar algo y sentir que te tengo un poquito más cerca.</p>
+          <div class="quote" style="text-align:center;">
+              <a href="https://music.youtube.com/watch?v=sUZOuXo2Bp8&si=jnc7BJ2nh2Sy32l2" target="_blank" style="text-decoration:none; color:#ff6b81; font-weight:bold;">
+                  ▶ Escuchar (la canción que siempre me recuerda a ti) 🤍
+              </a>
+          </div>
+
+          <div style="width:100%; margin-top:20px;">
+              <div class="canvas-container">
+                <div style="font-weight:700;color:#5b3336;margin-bottom:6px;text-align:center">Jueguito de 12 niveles (Plataforma + Puzzles) ❤️</div>
+                <div id="game-instructions" style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:8px">
+                    **Instrucciones:** Usa ← → para moverte, ↑ o Espacio para saltar. Pisa interruptores o almohadillas para resolver puzzles.
+                </div>
+                <canvas id="gameCanvas" width="720" height="320" tabindex="0" aria-label="Mini juego para Sheyla"></canvas>
+                
+                <div class="touch-controls">
+                    <button id="leftBtn" class="touch-btn">←</button>
+                    <button id="jumpBtn" class="touch-btn jump">↑</button>
+                    <button id="rightBtn" class="touch-btn">→</button>
+                </div>
+
+                <div class="controls" style="margin-top:8px">
+                  <button id="restartBtn" class="btn">Reiniciar</button>
+                  <button id="nextBtn" class="btn">Siguiente nivel</button>
+                  <button id="muteBtn" class="btn">🔈 Mute Sonidos</button>
+                </div>
+                <div style="margin-top:8px;text-align:center">
+                    <span class="small">Nivel <strong id="levelLabel">1</strong> · Intentos: <span id="attempts">0</span></span>
+                    <span id="powerup-status"></span> <div id="gameStatus" class="small" style="font-weight:600; margin-top:4px; min-height:16px;">Nivel 1 — ¡encuentra el corazón doble salto! 😉</div>
+                </div>
+                <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:center">
+                  <label class="small">Dificultad</label>
+                  <input id="difficulty" type="range" min="0" max="2" value="1">
+                  <div id="diffLabel" class="small" style="font-weight:700">Medio</div>
+                </div>
+              </div>
+          </div>
+        </article>
+
+        <!-- page-10 -->
+        <article class="card" id="page-10" aria-labelledby="significas-title">
+            <h2 id="significas-title">Lo mucho que significas para mí</h2>
+            <p>Princesa, eres todo para mí. Esta parte de la página es para recordarte cada que vengas y lo leas, además de lo que tanto te lo recuerdo cuando vamos a dormir o cuando me dan ataques de amor.</p>
+            <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:74%; top:40%;">🤍</button>
+        </article>
+
+        <!-- page-11 -->
+        <article class="card" id="page-11" aria-labelledby="pdf-title">
+            <h2 id="pdf-title">Aquí hay otra cosita para ti ✨</h2>
+            <p>Mi princesa, no todo lo que siento podía caber en esta página. Por eso, he guardado un documento especial solo para ti, lleno de más cosas que quiero recordarte.</p>
+            <div class="quote" style="text-align:center;">
+                <a href="https://drive.google.com/file/d/1RHUHGqlFmizHURG8fprh7Ev59fcAruEW/view?usp=sharing" target="_blank" style="text-decoration:none; color:#ff6b81; font-weight:bold;">
+                    📄 Abrir el documento secreto (PDF) 🤫
+                </a>
+            </div>
+            <p class="tiny" style="text-align:center; margin-top:10px;">(¡Ya está el enlace! Entra cuando quieras, mi niña. Te amo. 💖)</p>
+            <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:68%; top:24%;">🤍</button>
+        </article>
+
+        <!-- page-12 (final) -->
+        <article class="card" id="page-12" aria-labelledby="final-title">
+          <h2 id="final-title">El Final, sellado con mi Corazón 🤍</h2>
+          <p>Esto no es un cierre, es el inicio de todo lo que quiero construir contigo. Es una caja de palabras que guardé con el más puro y blanco de mis cariños. Guárdala, imprímela, léela, pero sobre todo, recuerda que cada línea tiene un pedacito de mi alma, entregado solo para ti.</p>
+          <p>Mi vida, mi niña, <strong>TE AMO con toda la fuerza y la sinceridad de mi corazón. Eres mi todo, hoy y siempre.</strong></p>
+          <div style="margin-top:12px; text-align:right; font-size:14px;">
+            <div>Con todo mi corazón — Samuel 🤍</div>
+            <div class="signature">Con todo mi corazón — Samuel 🤍</div>
+          </div>
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:92%; top:18%;">🤍</button>
+        </article>
+      </section>
+
+      <!-- ASIDE: resumen y nota -->
+      <aside>
+        <div class="card side" aria-labelledby="sidebar-title">
+          <div id="sidebar-title" style="font-weight:700;color:#5b3336">Un resumen bonito</div>
+          <div class="avatar" aria-hidden="true">🤍</div>
+          <div class="tiny">Guardado con cuidado desde 01/16/2025 — un texto hecho para ti, con risas, promesas y muchas ganas de verte.</div>
+          <div class="hearts" aria-hidden="true"><div class="heart">♥</div><div class="heart">❣</div><div class="heart">💫</div></div>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px">
+            Fecha del primer encuentro: <strong>01/16/2025</strong><br>
+            Firma: <span class="signature">Con todo mi corazón, Samuel 🤍</span>
+          </div>
+          <button class="page-secret" data-secret="my princess 🤍 i love u" style="left:50%; top:88%;">🤍</button>
+        </div>
+
+        <div class="card side" aria-labelledby="nota-title">
+          <div id="nota-title" style="font-weight:700;color:#5b3336">Nota rápida</div>
+          <p class="tiny">Esto fue escrito y guardado con empeño para ti. Si te emociona, házmelo saber; si quieres que lo ajuste, lo haré.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div style="font-size:13px;color:var(--muted)">Hecho con cariño · Cópialo, imprímelo o guárdalo como quieras.</div>
+    </footer>
+  </div>
+
+  <!-- Modal y overlay para secretos de la PÁGINA -->
+  <div id="secretOverlay" aria-hidden="true"></div>
+  <div id="secretModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <h3>Secreto</h3>
+    <p id="secretText">my princess 🤍 i love u</p>
+    <button id="closeSecretBtn">Cerrar</button>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    /* ---------- AUDIO (WebAudio) ---------- */
+    let audioCtx = null;
+    function ensureAudio() {
+      if (!audioCtx) {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+          console.warn('AudioContext no disponible:', e);
+          audioCtx = null;
+        }
+      }
+    }
+    function resumeAudioIfNeeded() {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(()=>{});
+      }
+    }
+    document.addEventListener('click', ()=> { ensureAudio(); resumeAudioIfNeeded(); }, { once: true });
+
+    function playTone(freq, type='sine', duration=0.12, gain=0.12, when=0, detune=0) {
+      if (!audioCtx) { ensureAudio(); if(!audioCtx) return; }
+      const t = audioCtx.currentTime + when;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = type;
+      o.frequency.setValueAtTime(freq, t);
+      o.detune.value = detune;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(gain, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+      o.connect(g);
+      g.connect(audioCtx.destination);
+      o.start(t);
+      o.stop(t + duration + 0.02);
+    }
+
+    function playJumpSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(420,'sine',0.09,0.12); }
+    function playDoubleJumpSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(520,'triangle',0.12,0.14); playTone(660,'sine',0.09,0.08,0.05); }
+    function playPowerupSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(880,'sine',0.18,0.15); playTone(1320,'triangle',0.12,0.08,0.06); }
+    function playHitSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(180,'sawtooth',0.14,0.18); }
+    function playLevelCompleteSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(620,'sine',0.12,0.14); playTone(780,'sine',0.12,0.12,0.06); playTone(980,'triangle',0.18,0.08,0.12); }
+    function playModalSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(720,'sine',0.14,0.16); playTone(940,'sine',0.12,0.08,0.06); }
+    function playSecretClickSound(){ ensureAudio(); resumeAudioIfNeeded(); playTone(1020,'triangle',0.12,0.14); }
+
+    /* ---------- LÓGICA DE LOS SECRETOS EN LA PÁGINA ---------- */
+    const pageSecrets = Array.from(document.querySelectorAll('.page-secret'));
+    const secretModal = document.getElementById('secretModal');
+    const secretOverlay = document.getElementById('secretOverlay');
+    const secretTextEl = document.getElementById('secretText');
+    const closeSecretBtn = document.getElementById('closeSecretBtn');
+
+    function showSecret(text){
+      secretTextEl.textContent = text;
+      secretModal.classList.add('visible');
+      secretOverlay.classList.add('visible');
+      try { playModalSound(); } catch(e) {}
+      closeSecretBtn.focus();
+    }
+    function hideSecret(){
+      secretModal.classList.remove('visible');
+      secretOverlay.classList.remove('visible');
+    }
+
+    pageSecrets.forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const t = btn.dataset.secret || 'my princess 🤍 i love u';
+        try { playSecretClickSound(); } catch(e) {}
+        showSecret(t);
+      });
+      btn.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
+      });
+    });
+
+    closeSecretBtn.addEventListener('click', hideSecret);
+    secretOverlay.addEventListener('click', hideSecret);
+    document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') hideSecret(); });
+
+    /* ---------- Juego: 12 niveles variados ---------- */
+    const canvas = document.getElementById('gameCanvas');
+    if (!canvas) { console.error("Canvas no encontrado. Juego desactivado."); return; }
+    canvas.setAttribute('tabindex','0');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    let player = {x:40,y:0,w:28,h:36,vx:0,vy:0,onGround:false, hasJumpedOnce:false, hasDoubleJump:false, alive:true};
+    const GRAV = 0.95;
+    const JUMP_VELOCITY = -15;
+    let keys = {left:false,right:false};
+    let currentLevel = 0, attempts = 0;
+    let levelData = [], platforms = [], spikes = [], enemies = [], movingPlatforms = [], star = {x:0,y:0,r:12,got:false}, powerup = {x:0,y:0,r:10,got:false, active:false};
+    let muted = false;
+    const levelLabel = document.getElementById('levelLabel');
+    const attemptsEl = document.getElementById('attempts');
+    const gameStatus = document.getElementById('gameStatus');
+    const powerupStatusEl = document.getElementById('powerup-status');
+    const diffRange = document.getElementById('difficulty');
+    const diffLabel = document.getElementById('diffLabel');
+
+    if(diffLabel) diffLabel.textContent = 'Medio';
+    if(diffRange) diffRange.addEventListener('input', ()=> { if(diffLabel) diffLabel.textContent = diffRange.value === "0" ? 'Fácil' : diffRange.value === "1" ? 'Medio' : 'Difícil'; });
+    function difficultyModifier(){ return diffRange ? (diffRange.value === "0" ? 0.85 : diffRange.value === "1" ? 1 : 1.15) : 1; }
+
+    // ======= FUNCTION buildLevels (PARCHE INCLUIDO) =======
+    function buildLevels(){
+      levelData = [];
+      const baseY = H;
+
+      // Nivel 1: Introducción a pinchos y plataformas básicas
+      levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:120,y:baseY-80,w:120,h:12},{x:320,y:baseY-130,w:100,h:12}], spikes:[{x:220,y:baseY-12,w:80}], enemies:[], moving:[], star:{x:620,y:baseY-200}, powerup:{x:150,y:baseY-100, active:false} });
+
+      // Nivel 2: Introducción al power-up (Corazón) y doble salto necesario
+      levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:100,y:baseY-80,w:100,h:12},{x:400,y:baseY-80,w:100,h:12}], spikes:[{x:250,y:baseY-12,w:100}], enemies:[], moving:[], star:{x:450,y:baseY-110}, powerup:{x:150,y:baseY-100, active:true} });
+
+      // Nivel 3: Plataformas móviles y uso del doble salto para esquivar (Enemy)
+      levelData.push({ type:'puzzle-switch', bg:'soft', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:120,y:baseY-100,w:100,h:12},{x:550,y:baseY-100,w:100,h:12}], spikes:[{x:300,y:baseY-12,w:100}], enemies:[{x:420,y:baseY-120,w:24,h:24,dir:1,range:50,speed:1.2}], moving:[{x:320,y:baseY-180,w:80,h:12,axis:'y',from:baseY-200,to:baseY-120,spd:0.8}], star:{x:600,y:baseY-130}, powerup:{x:170,y:baseY-130, active:true} });
+
+      // ======== NIVEL 4 (CORREGIDO) ========
+      // Problema original: el enemigo/cubo y la plataforma tapaban el corazón.
+      // Fixes: - Muevo estrella a una posición despejada (más a la izquierda y un poco más arriba)
+      //        - Ajusto la posición y rango del enemigo para que no patrulle sobre la estrella
+      //        - Muevo/sirvo la plataforma móvil para no cubrir la zona del star
+      levelData.push({
+        type:'platform',
+        bg:'soft',
+        platforms:[
+          {x:0,y:baseY-12,w:100,h:12},
+          {x:260,y:baseY-12,w:100,h:12},         // ledge más a la derecha
+          {x:520,y:baseY-12,w:160,h:12},
+          {x:420,y:baseY-150,w:80,h:12}
+        ],
+        spikes:[{x:100,y:baseY-12,w:180},{x:380,y:baseY-12,w:180}],
+        // enemigo moviéndose pero con rango reducido y velocidad más baja
+        enemies:[{x:320,y:baseY-140,w:24,h:24,dir:1,range:30,speed:0.8}],
+        // moving platform colocada fuera del camino directo al star
+        moving:[{x:180,y:baseY-200,w:80,h:12,axis:'y',from:baseY-190,to:baseY-120,spd:0.6}],
+        // estrella colocada en hueco accesible (sobre una plataforma despejada)
+        star:{x:460,y:baseY-200},
+        powerup:{x:50,y:baseY-100, active:true}
+      });
+
+      // Nivel 5: Doble salto necesario para pasar enemigos voladores
+      levelData.push({ type:'puzzle-seq', bg:'soft', platforms:[{x:0,y:baseY-12,w:W,h:12}], spikes:[], enemies:[], moving:[], pads:[ {x:140,y:baseY-60,w:60,h:14,color:'#6fb3ff',order:0}, {x:300,y:baseY-60,w:60,h:14,color:'#b88bff',order:1}, {x:460,y:baseY-60,w:60,h:14,color:'#7be7c7',order:2} ], seq:[0,1,2], star:{x:620,y:baseY-120}, powerup:{x:999,y:999, active:false} });
+
+      // ======== NIVEL 6 (CORREGIDO) ========
+      // Problema original: difícil subir a la plataforma porque te golpean con facilidad.
+      // Fixes: - Hice la plataforma de la derecha más ancha y con un "paso" intermedio para subir.
+      //        - Reduje velocidad de enemigos y los aparté ligeramente de la zona de subida.
+      levelData.push({
+        type:'platform',
+        bg:'warm',
+        platforms:[
+          {x:0,y:baseY-12,w:W,h:12},
+          {x:100,y:baseY-120,w:120,h:12},
+          {x:340,y:baseY-180,w:100,h:12},
+          // plataforma de destino ahora más ancha para facilitar el aterrizaje
+          {x:540,y:baseY-120,w:180,h:12},
+          // plataforma "escalón" añadida a la izquierda para subir con menos riesgo
+          {x:420,y:baseY-140,w:80,h:12}
+        ],
+        spikes:[{x:200,y:baseY-12,w:150},{x:450,y:baseY-12,w:130}],
+        // enemigos más lentos y un poco desplazados
+        enemies:[
+          {x:120,y:baseY-150,w:26,h:26,dir:1,range:40,speed:0.9},
+          {x:640,y:baseY-150,w:26,h:26,dir:-1,range:45,speed:1.0}
+        ],
+        moving:[{x:20,y:baseY-100,w:80,h:12,axis:'y',from:baseY-150,to:baseY-50,spd:0.6}],
+        star:{x:700,y:baseY-130},
+        powerup:{x:420,y:baseY-210, active:true}
+      });
+
+      // Nivel 7: Plataformas con salto de precisión
+      levelData.push({ type:'platform', bg:'soft', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:180,y:baseY-110,w:80,h:12},{x:300,y:baseY-160,w:80,h:12},{x:460,y:baseY-120,w:90,h:12}], spikes:[], enemies:[], moving:[], star:{x:700,y:baseY-130}, powerup:{x:999,y:999, active:false} });
+
+      // Nivel 8: Puzzle + moving + timing
+      levelData.push({ type:'puzzle-switch', bg:'soft', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:120,y:baseY-120,w:120,h:12},{x:360,y:baseY-160,w:120,h:12}], spikes:[], enemies:[], moving:[{x:260,y:baseY-200,w:80,h:12,axis:'y',from:baseY-220,to:baseY-120,spd:0.9}], switches:[ {x:140,y:baseY-116,w:18,h:18,active:false} ], doors:[ {x:480,y:baseY-90,w:60,h:60,closed:true} ], star:{x:640,y:baseY-140}, powerup:{x:999,y:999, active:false} });
+
+      // Nivel 9: Plataformas con enemigos voladores (simulado)
+      levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:130,y:baseY-140,w:120,h:12},{x:380,y:baseY-170,w:120,h:12}], spikes:[], enemies:[{x:200,y:baseY-180,w:22,h:22,dir:1,range:120,speed:1.1},{x:480,y:baseY-200,w:22,h:22,dir:-1,range:100,speed:1.3}], moving:[], star:{x:700,y:baseY-150}, powerup:{x:999,y:999, active:false} });
+
+      // Nivel 10: Plataformas pequeñas y precisión (difícil)
+      levelData.push({ type:'platform', bg:'soft', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:180,y:baseY-100,w:60,h:12},{x:260,y:baseY-150,w:60,h:12},{x:340,y:baseY-120,w:60,h:12},{x:420,y:baseY-180,w:80,h:12}], spikes:[{x:90,y:baseY-12,w:100}], enemies:[], moving:[], star:{x:680,y:baseY-140}, powerup:{x:999,y:999, active:false} });
+
+      // Nivel 11: Combinado (puzzle+enemigos+moving)
+      levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:140,y:baseY-120,w:120,h:12},{x:360,y:baseY-170,w:120,h:12}], spikes:[], enemies:[{x:300,y:baseY-140,w:24,h:24,dir:1,range:80,speed:1}], moving:[{x:220,y:baseY-200,w:80,h:12,axis:'y',from:baseY-210,to:baseY-110,spd:0.7}], star:{x:700,y:baseY-120}, powerup:{x:999,y:999, active:false} });
+
+      // Nivel 12: Final especial (ambientación sunset)
+      levelData.push({ type:'platform', bg:'sunset', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:140,y:baseY-110,w:140,h:12},{x:380,y:baseY-160,w:140,h:12}], spikes:[], enemies:[], moving:[], star:{x:720,y:baseY-140}, powerup:{x:999,y:999, active:false} });
+    }
+    // ======= END buildLevels =======
+
+    let puzzleState = { switches: [], doors: [], pads: [], seqTarget: [], seqIndex: 0 };
+
+    function loadLevel(i){
+      const data = levelData[i];
+      platforms = (data.platforms||[]).map(p=>({...p}));
+      spikes = (data.spikes||[]).map(s=>({...s}));
+      enemies = (data.enemies||[]).map(e=>({...e, baseX:e.x, baseY:e.y}));
+      movingPlatforms = (data.moving||[]).map(m=>({...m, dir:1}));
+      star.x = data.star.x; star.y = data.star.y; star.r = data.star.r || 12; star.got = false;
+      powerup.x = data.powerup.x; powerup.y = data.powerup.y; powerup.r = 12; powerup.got = !data.powerup.active;
+      player.x = 40; player.y = H - 80; player.vx = 0; player.vy = 0; player.onGround = false; player.hasJumpedOnce = false; player.hasDoubleJump = powerup.got; player.alive = true;
+
+      puzzleState.switches = []; puzzleState.doors = []; puzzleState.pads = []; puzzleState.seqTarget = []; puzzleState.seqIndex = 0;
+      if(data.type === 'puzzle-switch'){ puzzleState.switches = (data.switches||[]).map(s=>({...s})); puzzleState.doors = (data.doors||[]).map(d=>({...d})); }
+      else if (data.type === 'puzzle-seq'){ puzzleState.pads = (data.pads||[]).map(p=>({...p,activated:false})); puzzleState.seqTarget = (data.seq||[]).slice(); puzzleState.seqIndex = 0; }
+
+      currentLevel = i; attempts++; attemptsEl.textContent = attempts; levelLabel.textContent = currentLevel + 1;
+      if(gameStatus){
+        if(data.type === 'platform') gameStatus.textContent = `Nivel ${currentLevel+1}: Plataforma — ¡a saltar!`;
+        else if(data.type === 'puzzle-switch') gameStatus.textContent = `Nivel ${currentLevel+1}: Puzzle — activa los interruptores para abrir la puerta.`;
+        else if(data.type === 'puzzle-seq') gameStatus.textContent = `Nivel ${currentLevel+1}: Puzzle de Secuencia — pisa las almohadillas en orden.`;
+      }
+      powerupStatusEl.textContent = player.hasDoubleJump ? '✅ Doble Salto' : '❌ Falta Power-UP';
+    }
+
+    function rectsIntersect(a,b){ return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y; }
+    function roundRect(x,y,w,h,r,fill,stroke){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); if(fill){ ctx.fillStyle = fill; ctx.fill(); } if(stroke){ ctx.strokeStyle = stroke; ctx.stroke(); } }
+    function drawSpikes(x,y,w){ const spikeH = 14; const count = Math.max(1, Math.floor(w/12)); const step = w / count; for(let i=0;i<count;i++){ const sx = x + i*step; ctx.beginPath(); ctx.moveTo(sx,y); ctx.lineTo(sx + step/2, y - spikeH); ctx.lineTo(sx + step, y); ctx.closePath(); ctx.fillStyle = '#b33'; ctx.fill(); } }
+    function drawPowerup(x,y,r){ ctx.save(); ctx.translate(x,y); ctx.beginPath(); ctx.fillStyle = '#ff3355'; ctx.arc(0,0,r,0,Math.PI*2); ctx.fill(); ctx.fillStyle = '#fff'; ctx.font = '14px serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('❤️',0,0); ctx.restore(); }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      const data = levelData[currentLevel] || {type:'platform'};
+      // background según ambientación
+      if(data.bg === 'sunset'){
+        const g = ctx.createLinearGradient(0,0,0,H);
+        g.addColorStop(0,'#ffd5c8');
+        g.addColorStop(1,'#fff6f0');
+        ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      } else if (data.bg === 'soft') {
+        const g = ctx.createLinearGradient(0,0,0,H);
+        g.addColorStop(0,'#f7fbff');
+        g.addColorStop(1,'#f8f7ff');
+        ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      } else {
+        const g = ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#fffaf6'); g.addColorStop(1,'#fff6f8'); ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      }
+
+      ctx.fillStyle = '#fff'; ctx.fillRect(0,H-60,W,60);
+
+      for(const p of platforms) roundRect(p.x,p.y,p.w,p.h,6,'#fff','#e9d6d8');
+      for(const m of movingPlatforms) roundRect(m.x,m.y,m.w,m.h,6,'#fff4f6','#e6cfd2');
+      for(const s of spikes) drawSpikes(s.x,s.y,s.w);
+      for(const en of enemies) { ctx.fillStyle = '#b33'; ctx.fillRect(en.x - en.w/2, en.y - en.h/2, en.w, en.h); }
+
+      if(!powerup.got && isFinite(powerup.x) && isFinite(powerup.y)) drawPowerup(powerup.x, powerup.y, powerup.r);
+
+      if(data.type === 'puzzle-switch'){
+        for(const s of puzzleState.switches){ ctx.fillStyle = s.active ? '#ffd86b' : '#ddd'; roundRect(s.x, s.y, s.w, s.h, 4, ctx.fillStyle, '#c8b0b4'); ctx.fillStyle = '#5b3336'; ctx.font='12px system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(s.active ? 'ON' : 'OFF', s.x + s.w/2, s.y + s.h/2); }
+        for(const d of puzzleState.doors){ if(d.closed) roundRect(d.x, d.y, d.w, d.h, 6, '#8b5a5f', '#6a3f42'); }
+      } else if (data.type === 'puzzle-seq'){
+        for(const p of puzzleState.pads){ ctx.fillStyle = p.activated ? p.color : '#eee'; roundRect(p.x, p.y, p.w, p.h, 6, ctx.fillStyle, '#cfcfcf'); ctx.fillStyle = '#fff'; ctx.font='14px system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('●', p.x + p.w/2, p.y + p.h/2); }
+        ctx.fillStyle = '#5b3336'; ctx.font='13px system-ui'; ctx.fillText(`Secuencia: ${puzzleState.seqIndex}/${puzzleState.seqTarget.length}`, 10, 18);
+      }
+
+      if(!star.got){ ctx.save(); ctx.translate(star.x,star.y); ctx.beginPath(); ctx.fillStyle = '#ffd86b'; ctx.arc(0,0,star.r,0,Math.PI*2); ctx.fill(); ctx.fillStyle = '#fff'; ctx.font = '14px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('✨',0,0); ctx.restore(); }
+
+      // jugador (emoji corazon blanco)
+      ctx.save(); ctx.font = '36px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('🤍', player.x + player.w/2, player.y + player.h/2); ctx.restore();
+
+      if(star.got){
+        ctx.fillStyle = 'rgba(80,200,120,0.06)'; ctx.fillRect(0,0,W,H);
+        ctx.fillStyle = '#2f5a36'; ctx.font='18px Playfair Display, serif'; ctx.textAlign='center';
+        ctx.fillText('Nivel completado', W/2, H/2 - 12); ctx.font='13px system-ui'; ctx.fillText(levelCompleteMessage(), W/2, H/2 + 10);
+      }
+
+      ctx.fillStyle = '#5b3336'; ctx.font='13px system-ui'; ctx.fillText('Nivel ' + (currentLevel+1) + ' / ' + levelData.length, 10, 18);
+    }
+
+    function levelCompleteMessage(){
+      return {
+        0: '¡Bien hecho, mi cosita! Primer nivel superado, ¡a por el doble salto! ❤️',
+        1: '¡Con el doble salto eres imparable! Eres brillante. ✨',
+        2: 'Puzzle resuelto, mi niña. ✨',
+        3: '¡Mi campeona! Venciste el vacío con tu habilidad. ',
+        4: 'Secuencia correcta. ¡Eres genial!',
+        5: 'Boss vencido, casi listo. 💖',
+        6: 'Precisión perfecta, mi niña. 😉',
+        7: 'Buen timing — las plataformas movidas no pudieron contigo.',
+        8: 'Esquivaste a los enemigos voladores, wow.',
+        9: 'Saltos complicados superados. 💪',
+        10: 'Combinado perfecto. ¡Te admiro!',
+        11: 'Final conseguido. Te amo, mi bebé. 💖'
+      }[currentLevel] || '¡LO HICISTE! Pulsa siguiente.';
+    }
+
+    function update(){
+      if(!player.alive || star.got) return;
+      const data = levelData[currentLevel];
+      const mod = difficultyModifier();
+      if(keys.left) player.vx -= 0.8 * mod;
+      if(keys.right) player.vx += 0.8 * mod;
+      player.vy += GRAV; player.vx *= 0.92; player.x += player.vx; player.y += player.vy;
+
+      if(!powerup.got && isFinite(powerup.x) && isFinite(powerup.y)){ const dx = (player.x + player.w/2) - powerup.x; const dy = (player.y + player.h/2) - powerup.y; const dist = Math.sqrt(dx*dx + dy*dy); if(dist < powerup.r + 8){ powerup.got = true; player.hasDoubleJump = true; try{ playPowerupSound(); }catch(e){} if(gameStatus) gameStatus.textContent = '¡Corazón Doble Salto Activado! Úsalo bien. 💖'; powerupStatusEl.textContent = '✅ Doble Salto'; } }
+
+      for(const m of movingPlatforms){ if(m.axis === 'y'){ m.y += m.spd * m.dir; if(m.y < m.from){ m.y = m.from; m.dir = 1; } if(m.y > m.to){ m.y = m.to; m.dir = -1; } } else { m.x += m.spd * m.dir; if(m.x < m.from){ m.x = m.from; m.dir = 1; } if(m.x > m.to){ m.x = m.to; m.dir = -1; } } }
+      for(const en of enemies){ en.x += en.speed * en.dir; if(Math.abs(en.x - en.baseX) > en.range) en.dir *= -1; }
+
+      const plats = platforms.concat(movingPlatforms);
+      player.onGround = false;
+      for(const p of plats){
+        if(player.x + player.w > p.x && player.x < p.x + p.w && player.y + player.h > p.y && player.y < p.y + p.h){
+          if(player.vy > 0 && (player.y + player.h - player.vy) <= p.y + 1){ player.y = p.y - player.h; player.vy = 0; player.onGround = true; player.hasJumpedOnce = false; }
+          else if(player.vy < 0 && (player.y - player.vy) >= p.y + p.h - 1){ player.y = p.y + p.h; player.vy = 0; }
+          else { if(player.x < p.x) player.x = p.x - player.w; else player.x = p.x + p.w; player.vx = 0; }
+        }
+      }
+
+      if(player.y > H + 200){ if(gameStatus) gameStatus.textContent = '¡Te caíste, mi niña! Vuelve a intentar.'; loadLevel(currentLevel); return; }
+
+      // lógica de puzzles (switch / seq)
+      if(data.type === 'puzzle-switch'){
+        for(const s of puzzleState.switches){
+          const a = {x:player.x,y:player.y,w:player.w,h:player.h};
+          const b = {x:s.x,y:s.y,w:s.w,h:s.h};
+          if(rectsIntersect(a,b) && !s.active){ s.active = true; if(gameStatus) gameStatus.textContent = 'Interruptor activado!'; if(puzzleState.switches.every(sw=>sw.active)){ for(const d of puzzleState.doors) d.closed = false; if(gameStatus) gameStatus.textContent = '¡Puertas abiertas! Ve por la estrella ✨'; } }
+        }
+        for(const d of puzzleState.doors){ if(d.closed){ if(player.x + player.w > d.x && player.x < d.x + d.w && player.y + player.h > d.y && player.y < d.y + d.h){ if(player.x < d.x) player.x = d.x - player.w; else player.x = d.x + d.w; player.vx = 0; } } }
+      } else if (data.type === 'puzzle-seq'){
+        for(const p of puzzleState.pads){
+          const a = {x:player.x,y:player.y,w:player.w,h:player.h};
+          const b = {x:p.x,y:p.y,w:p.w,h:p.h};
+          if(rectsIntersect(a,b) && !p.activated){
+            const expectedPadIndex = puzzleState.seqTarget[puzzleState.seqIndex];
+            const padIndex = puzzleState.pads.findIndex(pp=>pp.order === p.order);
+            if(padIndex === expectedPadIndex){ p.activated = true; puzzleState.seqIndex++; if(gameStatus) gameStatus.textContent = `Correcto (${puzzleState.seqIndex}/${puzzleState.seqTarget.length})`; if(puzzleState.seqIndex >= puzzleState.seqTarget.length){ star.got = true; try{ playLevelCompleteSound(); }catch(e){} if(gameStatus) gameStatus.textContent = '¡Secuencia completa! Nivel resuelto ✨'; } }
+            else { puzzleState.pads.forEach(pp=>pp.activated=false); puzzleState.seqIndex = 0; if(gameStatus) gameStatus.textContent = 'Orden incorrecto. Empieza otra vez.'; }
+          }
+        }
+      }
+
+      // colisión estrella
+      const dx_star = (player.x + player.w/2) - star.x;
+      const dy_star = (player.y + player.h/2) - star.y;
+      const dist_star = Math.sqrt(dx_star*dx_star + dy_star*dy_star);
+      if(dist_star < star.r + 8 && !star.got){
+        if(levelData[currentLevel].type !== 'puzzle-seq'){
+          const closedDoorExists = puzzleState.doors && puzzleState.doors.some(d=>d.closed);
+          if(!closedDoorExists){ star.got = true; try{ playLevelCompleteSound(); }catch(e){} if(gameStatus) gameStatus.textContent = 'Nivel completado! Pulsa Siguiente.'; }
+          else { if(gameStatus) gameStatus.textContent = 'Algo bloquea la estrella. Activa los interruptores.'; }
+        }
+      }
+
+      // CHEQUEOS DE MUERTE (Spikes y Enemies)
+      let isHit = false;
+      for(const s of spikes){
+        if(player.x + player.w > s.x && player.x < s.x + s.w && player.y + player.h > s.y - 2){ isHit = true; break; }
+      }
+      if(!isHit){
+        for(const en of enemies){
+          const a = {x:player.x,y:player.y,w:player.w,h:player.h};
+          const b = {x:en.x - en.w/2, y: en.y - en.h/2, w: en.w, h: en.h};
+          if(rectsIntersect(a,b)){ isHit = true; break; }
+        }
+      }
+
+      if(isHit){
+        player.alive = false;
+        try{ playHitSound(); }catch(e){}
+        if(gameStatus) gameStatus.textContent = '¡Auch! Te golpearon. Recuerda: eres mi princesa, no te rindas. Reinicia. 💪';
+        setTimeout(() => loadLevel(currentLevel), 500);
+        return;
+      }
+    }
+
+    function loop(){ update(); draw(); requestAnimationFrame(loop); }
+
+    function handleJumpAttempt(){ 
+      if(!player.alive || star.got) return; 
+      if(player.onGround){ 
+        player.vy = JUMP_VELOCITY * difficultyModifier(); 
+        player.onGround = false; 
+        player.hasJumpedOnce = true; 
+        try{ playJumpSound(); }catch(e){} 
+      } else if (player.hasDoubleJump && player.hasJumpedOnce) { 
+        player.vy = JUMP_VELOCITY * difficultyModifier() * 0.8; 
+        player.hasJumpedOnce = false; 
+        try{ playDoubleJumpSound(); }catch(e){} 
+        if(gameStatus) gameStatus.textContent = '¡Doble salto!';
+      } 
+    }
+
+    // CONTROLES: las flechas no cambian la página; solo funcionan si el canvas tiene foco
+    canvas.addEventListener('click', ()=> { canvas.focus(); ensureAudio(); resumeAudioIfNeeded(); });
+    canvas.addEventListener('keydown', (e)=>{ 
+        const k = e.key; 
+        if(!player.alive || star.got) return; 
+        if(['ArrowLeft','ArrowRight','ArrowUp',' ','a','d','w'].includes(k)) e.preventDefault(); 
+        if(k === 'ArrowLeft' || k === 'a') keys.left = true; 
+        if(k === 'ArrowRight' || k === 'd') keys.right = true; 
+        if(k === 'ArrowUp' || k === 'w' || k === ' ') handleJumpAttempt();
+    });
+    canvas.addEventListener('keyup', (e)=>{ const k = e.key; if(k === 'ArrowLeft' || k === 'a') keys.left = false; if(k === 'ArrowRight' || k === 'd') keys.right = false; });
+
+    // controles táctiles
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const jumpBtn = document.getElementById('jumpBtn');
+    const handleTouchStartMove = (direction) => (e) => { e.preventDefault(); canvas.focus(); ensureAudio(); resumeAudioIfNeeded(); if(!player.alive || star.got) return; if(direction === 'left') keys.left = true; if(direction === 'right') keys.right = true; };
+    const handleTouchEndMove = (direction) => (e) => { e.preventDefault(); if(direction === 'left') keys.left = false; if(direction === 'right') keys.right = false; };
+    if(leftBtn){ leftBtn.addEventListener('touchstart', handleTouchStartMove('left'), {passive: false}); leftBtn.addEventListener('touchend', handleTouchEndMove('left'), {passive: false}); }
+    if(rightBtn){ rightBtn.addEventListener('touchstart', handleTouchStartMove('right'), {passive: false}); rightBtn.addEventListener('touchend', handleTouchEndMove('right'), {passive: false}); }
+    if(jumpBtn){ jumpBtn.addEventListener('click', ()=>{ ensureAudio(); resumeAudioIfNeeded(); handleJumpAttempt(); }); jumpBtn.addEventListener('touchend', (e) => { e.preventDefault(); ensureAudio(); resumeAudioIfNeeded(); handleJumpAttempt(); }, {passive: false}); }
+
+    document.getElementById('restartBtn').addEventListener('click', ()=> { loadLevel(currentLevel); if(gameStatus) gameStatus.textContent = 'Nivel reiniciado. Respira profundo y continúa, mi cosita. 😊'; });
+    document.getElementById('nextBtn').addEventListener('click', ()=> {
+      if(!star.got){ if(gameStatus) gameStatus.textContent = '¡Espera un poquito, mi niña! Primero tienes que llegar a la estrella. ✨'; return; }
+      if(currentLevel < levelData.length - 1){ currentLevel++; loadLevel(currentLevel); }
+      else { if(gameStatus) gameStatus.textContent = '¡Terminaste! Te amo, mi bebé. Abriendo la página final...'; setTimeout(()=>{ window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }, 400); }
+    });
+    document.getElementById('muteBtn').addEventListener('click', ()=> { muted = !muted; document.getElementById('muteBtn').textContent = muted ? '🔇 Mute Sonidos' : '🔈 Mute Sonidos'; });
+
+    // INIT juego
+    buildLevels();
+    loadLevel(0);
+    loop();
+  });
+</script>
+</body>
+</html>
