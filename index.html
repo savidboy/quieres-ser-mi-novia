@@ -383,7 +383,7 @@
     const W = canvas.width, H = canvas.height;
     let player = {x:40,y:0,w:28,h:36,vx:0,vy:0,onGround:false, hasJumpedOnce:false, hasDoubleJump:false, alive:true};
     const GRAV = 0.95;
-    const JUMP_VELOCITY = -15;
+    const JUMP_VELOCITY = -18;
     let keys = {left:false,right:false};
     let currentLevel = 0, attempts = 0;
     let levelData = [], platforms = [], spikes = [], enemies = [], movingPlatforms = [], star = {x:0,y:0,r:12,got:false}, powerup = {x:0,y:0,r:10,got:false, active:false};
@@ -397,7 +397,7 @@
 
     if(diffLabel) diffLabel.textContent = 'Medio';
     if(diffRange) diffRange.addEventListener('input', ()=> { if(diffLabel) diffLabel.textContent = diffRange.value === "0" ? 'Fácil' : diffRange.value === "1" ? 'Medio' : 'Difícil'; });
-    function difficultyModifier(){ return diffRange ? (diffRange.value === "0" ? 0.85 : diffRange.value === "1" ? 1 : 1.15) : 1; }
+    function difficultyModifier(){ return diffRange ? (diffRange.value === "0" ? 1.15 : diffRange.value === "1" ? 1 : 0.85) : 1; }
 
     // ======= FUNCTION buildLevels (PARCHE INCLUIDO) =======
     function buildLevels(){
@@ -405,7 +405,7 @@
       const baseY = H;
 
       // Nivel 1: Introducción a pinchos y plataformas básicas
-      levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:120,y:baseY-80,w:120,h:12},{x:320,y:baseY-130,w:100,h:12}], spikes:[{x:220,y:baseY-12,w:80}], enemies:[], moving:[], star:{x:620,y:baseY-200}, powerup:{x:150,y:baseY-100, active:false} });
+      levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:120,y:baseY-80,w:120,h:12},{x:320,y:baseY-130,w:100,h:12}], spikes:[{x:220,y:baseY-12,w:80}], enemies:[], moving:[], star:{x:620,y:baseY-200}, powerup:{x:150,y:baseY-100, active:true} });
 
       // Nivel 2: Introducción al power-up (Corazón) y doble salto necesario
       levelData.push({ type:'platform', bg:'warm', platforms:[{x:0,y:baseY-12,w:W,h:12},{x:100,y:baseY-80,w:100,h:12},{x:400,y:baseY-80,w:100,h:12}], spikes:[{x:250,y:baseY-12,w:100}], enemies:[], moving:[], star:{x:450,y:baseY-110}, powerup:{x:150,y:baseY-100, active:true} });
@@ -496,7 +496,7 @@
       enemies = (data.enemies||[]).map(e=>({...e, baseX:e.x, baseY:e.y}));
       movingPlatforms = (data.moving||[]).map(m=>({...m, dir:1}));
       star.x = data.star.x; star.y = data.star.y; star.r = data.star.r || 12; star.got = false;
-      powerup.x = data.powerup.x; powerup.y = data.powerup.y; powerup.r = 12; powerup.got = !data.powerup.active;
+      powerup.x = data.powerup.x; powerup.y = data.powerup.y; powerup.r = 12; powerup.got = false;
       player.x = 40; player.y = H - 80; player.vx = 0; player.vy = 0; player.onGround = false; player.hasJumpedOnce = false; player.hasDoubleJump = powerup.got; player.alive = true;
 
       puzzleState.switches = []; puzzleState.doors = []; puzzleState.pads = []; puzzleState.seqTarget = []; puzzleState.seqIndex = 0;
@@ -700,7 +700,9 @@
     const handleTouchEndMove = (direction) => (e) => { e.preventDefault(); if(direction === 'left') keys.left = false; if(direction === 'right') keys.right = false; };
     if(leftBtn){ leftBtn.addEventListener('touchstart', handleTouchStartMove('left'), {passive: false}); leftBtn.addEventListener('touchend', handleTouchEndMove('left'), {passive: false}); }
     if(rightBtn){ rightBtn.addEventListener('touchstart', handleTouchStartMove('right'), {passive: false}); rightBtn.addEventListener('touchend', handleTouchEndMove('right'), {passive: false}); }
-    if(jumpBtn){ jumpBtn.addEventListener('click', ()=>{ ensureAudio(); resumeAudioIfNeeded(); handleJumpAttempt(); }); jumpBtn.addEventListener('touchend', (e) => { e.preventDefault(); ensureAudio(); resumeAudioIfNeeded(); handleJumpAttempt(); }, {passive: false}); }
+    if(jumpBtn){ jumpBtn.addEventListener('click', ()=>{ ensureAudio(); resumeAudioIfNeeded(); handleJumpAttempt(); }); 
+                 jumpBtn.addEventListener('touchstart', (e) => { e.preventDefault(); ensureAudio(); resumeAudioIfNeeded(); handleJumpAttempt(); }, {passive: false}); 
+                 jumpBtn.addEventListener('touchend', (e) => { e.preventDefault(); }, {passive: false}); }
 
     document.getElementById('restartBtn').addEventListener('click', ()=> { loadLevel(currentLevel); if(gameStatus) gameStatus.textContent = 'Nivel reiniciado. Respira profundo y continúa, mi cosita. 😊'; });
     document.getElementById('nextBtn').addEventListener('click', ()=> {
