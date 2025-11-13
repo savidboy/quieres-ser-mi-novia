@@ -717,6 +717,39 @@
       font-size: 24px;
       z-index: 5;
     }
+
+    /* Estilos para letras sincronizadas */
+    .lyric-line {
+      transition: all 0.3s ease !important;
+    }
+    .lyric-line.active:not([style*="italic"]) {
+      background: linear-gradient(90deg, rgba(255,107,129,0.1), rgba(255,200,210,0.05)) !important;
+      color: #ff6b81 !important;
+      font-weight: 700 !important;
+      transform: scale(1.02) !important;
+      border-left: 3px solid #ff6b81 !important;
+    }
+    .lyrics-display::-webkit-scrollbar {
+      width: 6px;
+    }
+    .lyrics-display::-webkit-scrollbar-track {
+      background: rgba(255,107,129,0.1);
+      border-radius: 3px;
+    }
+    .lyrics-display::-webkit-scrollbar-thumb {
+      background: #ff6b81;
+      border-radius: 3px;
+    }
+    
+    /* Efecto de destello para nuevos versos */
+    @keyframes lyricFlash {
+      0% { background: rgba(255,107,129,0.2); }
+      100% { background: rgba(255,107,129,0.1); }
+    }
+    
+    .lyric-line.active:not([style*="italic"]) {
+      animation: lyricFlash 0.5s ease;
+    }
   </style>
 </head>
 
@@ -841,7 +874,68 @@ Porque para mi que no esperaba estar con nadie quise estar relacionado contigo i
           <button class="page-secret" data-secret="Dale Play y quédate conmigo un ratito." style="left:10%; top:20%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
-        <article class="card" id="page-12" aria-labelledby="final-title">
+        <!-- SECCIÓN BOY WITH LUV CON SINCRONIZACIÓN EXACTA DEL LRC CORRECTO -->
+        <article class="card" id="page-10" aria-labelledby="bwl-title">
+          <h2 id="bwl-title">Nuestra Canción: Boy With Luv 🎵</h2>
+          <p>Esta canción me recuerda a nosotros - cómo el amor simple y genuino puede ser tan poderoso.</p>
+
+          <div class="player-wrap" style="margin: 20px 0;">
+            <div class="player-title">Boy With Luv - BTS (feat. Halsey)</div>
+            <audio id="bwlAudio" controls preload="metadata">
+              <source src="boy-with-luv.mp3" type="audio/mpeg">
+              Tu navegador no soporta el elemento audio.
+            </audio>
+            <div class="tiny" style="text-align:center; margin-top:6px;">
+              (Asegúrate de tener el archivo "boy-with-luv.mp3" en la misma carpeta)
+            </div>
+          </div>
+
+          <div class="lyrics-container" style="margin-top: 20px;">
+            <div class="lyrics-title" style="text-align: center; font-weight: 700; color: #5b3336; margin-bottom: 15px;">
+              Letra Sincronizada 🤍
+              <div id="currentSection" style="font-size: 12px; font-weight: 400; color: #ff6b81; margin-top: 5px;">
+                Presiona play para comenzar...
+              </div>
+            </div>
+            
+            <div id="lyricsDisplay" class="lyrics-display" style="
+              height: 300px;
+              overflow-y: auto;
+              padding: 15px;
+              background: linear-gradient(180deg, #fffaf8, #fff5f5);
+              border-radius: 12px;
+              border: 1px solid rgba(255,107,129,0.1);
+              font-size: 14px;
+              line-height: 1.8;
+              text-align: center;
+            ">
+              <!-- La letra se cargará dinámicamente -->
+            </div>
+            
+            <div class="lyrics-controls" style="
+              display: flex;
+              gap: 10px;
+              justify-content: center;
+              margin-top: 12px;
+              flex-wrap: wrap;
+            ">
+              <button id="resetLyricsBtn" class="btn" style="font-size: 13px;">
+                🔄 Reiniciar Letra
+              </button>
+              <button id="adjustSyncBtn" class="btn" style="font-size: 13px;">
+                ⚙️ Ajustar Sincronización
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; text-align: center;">
+            <p class="tiny">"You got me high so fast" - como tú conmigo, mi amor</p>
+          </div>
+
+          <button class="page-secret" data-secret="Cada 'Oh my my my' es por ti." style="left:85%; top:15%;" aria-label="Secreto musical">🎵</button>
+        </article>
+
+        <article class="card" id="page-11" aria-labelledby="final-title">
           <h2 id="final-title">Y esto seria todo princesa 🤍</h2>
           <p>espero que te allá gustado este pequeño regalo de mi parte, TE AMO demasiado mi niña.
 Eres mi todo.</p>
@@ -1101,7 +1195,332 @@ Eres mi todo.</p>
       closeSecretBtn.addEventListener('click', hideSecret);
       secretOverlay.addEventListener('click', hideSecret);
       
+      // ========== SISTEMA DE LETRA SINCRONIZADA - BOY WITH LUV CON LRC EXACTO ==========
+      function initBTSLyrics() {
+        const audioElement = document.getElementById('bwlAudio');
+        const lyricsDisplay = document.getElementById('lyricsDisplay');
+        const resetBtn = document.getElementById('resetLyricsBtn');
+        const adjustSyncBtn = document.getElementById('adjustSyncBtn');
+        const currentSectionEl = document.getElementById('currentSection');
+        
+        if (!audioElement || !lyricsDisplay) return;
+
+        // LRC EXACTO en inglés - Parseado correctamente
+        const lrcText = `[ar:BTS]
+[al:MAP OF THE SOUL: 7]
+[ti:Boy With Luv (feat. Halsey)]
+[length:03:50.46]
+[re:www.megalobiz.com/lrc/maker]
+[ve:v1.2.3]
+[00:00.44](Oh-oh-oh-oh-oh)
+[00:03.88](Oh-oh-oh-oh-oh)
+[00:07.88](Oh-oh-oh-oh-oh)
+[00:11.86](Oh-oh-oh-oh-oh)
+[Verse 1: Jimin]
+[00:16.11]I'm curious about you, how's your day?
+[00:19.58]Oh, tell me (Oh yeah oh yeah, ah yeah ah yeah)
+[00:23.83]What makes you happy?
+[00:27.54]Oh, text me (Oh yeah oh yeah, oh yeah oh yeah)
+[Verse 2: V, Jin]
+[00:32.33]Your every picture
+[00:34.46]I wanna have under my pillow, oh, oh bae
+[00:40.31]Come be my teacher
+[00:42.18]Teach me everything about you
+[00:45.54]Your one, your two
+[Pre-Chorus: Jungkook, Jimin]
+[00:47.66]Listen my my baby
+[00:49.52]I'm flying high up in the sky
+[00:53.53](With the two wings that you gave me back then)
+[00:55.91]Now it's so high up here
+[00:57.77]I want you tuned in to my eyes
+[01:01.75]Yeah, you makin' me a boy with luv
+[Chorus: Halsey, Jungkook, Jimin]
+[01:04.41]Oh my, my, my, (uh) oh my, my, my
+[01:07.60]I've waited all my life
+[01:09.45]I want to be with you through everything
+[01:12.64]Oh my, my, my, (yeah) oh my, my, my
+[01:15.30]Looking for something right
+[01:17.42]Okay, now, I kinda get it
+[Post-Chorus: Halsey]
+[01:20.09](oh-oh-oh-oh-oh)
+[01:21.94]I want something stronger (I want it)
+[01:24.06](oh-oh-oh-oh-oh)
+[01:25.66]Than a moment, than a moment, love
+[01:28.05](oh-oh-oh-oh-oh)
+[01:29.91]I have waited longer
+[01:31.76](oh-oh-oh-oh-oh)
+[01:33.36]For a boy with, for a boy with luv
+[Verse 3: Suga]
+[01:36.29]From the moment I met you, ya, my life was all you, ya
+[01:40.01]You're the star that turns ordinaries into extraordinaries, oh yeah
+[01:44.25]One after another ay, ay, everything is special ay, ay
+[01:48.25]The things you're interested in, the way you walk or talk, and every little trivial habit of yours
+[Verse 4: J-Hope, Jungkook]
+[01:51.95](Hope world, ay)
+[01:52.75]Everyone says that I used to be so little and now I became a hero (Oh no)
+[01:56.47]I say that something like destiny was never my thing (Oh no)
+[02:00.19]World peace (No way)
+[02:02.05]A great order (No way)
+[02:04.18]I just want to keep you safe
+[02:06.57](Boy with luv)
+[Pre-Chorus: V, RM, Jin]
+[02:07.72]Listen my my baby
+[02:09.58]I'm flying high up in the sky
+[02:12.77](With the two wings that you gave me back then)
+[02:15.68]Now, it's so high up here
+[02:17.81]I want you tuned in to my eyes
+[02:21.28]Yeah, you makin' me a boy with luv
+[Chorus: Halsey, Jungkook, Jimin]
+[02:24.47]Oh my, my, my, (uh) oh my, my, my
+[02:27.40]You got me high so fast
+[02:29.25]I want to be with you through everything
+[02:32.43]Oh my, my, my, oh my, my, my
+[02:35.35]You got me fly so fast
+[02:37.48]Okay, now, I kinda' get it
+[Post-Chorus: V, Jin, Halsey]
+[02:39.88](Oh-oh-oh-oh-oh)
+[02:41.73]Love is nothing stronger (I want it)
+[02:43.86](Oh-oh-oh-oh-oh)
+[02:45.46](Than a boy with) Than a boy with luv
+[02:47.86](Oh-oh-oh-oh-oh)
+[02:49.73]Love is nothing stronger
+[02:51.57](Oh-oh-oh-oh-oh)
+[02:53.70](Than a boy with) Than a boy with luv
+[Bridge: RM, Halsey]
+[02:56.10]I'll tell you frankly
+[02:57.42]Sometimes I was a little stuck up
+[03:00.09]Elevated sky, expanded halls
+[03:01.96]Sometimes I prayed, let me run away
+[03:04.08]But your pain is my pain
+[03:05.93]When I realised that, I vowed to myself (Yeah)
+[03:08.06]With the wings of Icarus you gave me (Uh)
+[03:09.65]Not towards the sun but towards you
+[03:11.53]Let me fly
+[Chorus: Jungkook, V, Halsey]
+[03:12.85]Oh my, my, my, (uh) oh my, my, my
+[03:15.24]I've waited all my life (All my life)
+[03:17.38]I want to be with you through everything
+[03:20.29]Oh my, my, my, (yeah) oh my, my, my (Oh, oh)
+[03:23.48]Looking for something right (Right)
+[03:25.62]Okay, now, I kinda' get it
+[Post-Chorus: Jungkook, Jimin, Halsey]
+[03:27.75](Oh-oh-oh-oh-oh)
+[03:29.87]I want something stronger (I want something stronger, I want it)
+[03:32.26](Oh-oh-oh-oh-oh)
+[03:33.86]Than a moment, than a moment, love (Mo-moment, love)
+[03:35.65](Oh-oh-oh-oh-oh)
+[03:37.84]Love is nothing stronger (ooh ooh, oh yeah)
+[03:39.63](Oh-oh-oh-oh-oh)
+[03:41.75](Than a boy with) Than a boy with luv`;
+
+        // Parsear el LRC exactamente
+        function parseLRC(lrcText) {
+          const lines = lrcText.split('\n');
+          const lyrics = [];
+          let currentSection = "Intro";
+          
+          for (const line of lines) {
+            // Buscar etiquetas de sección [Verse 1: Jimin]
+            const sectionMatch = line.match(/\[([^:\]]+)(?::[^\]]+)?\]/);
+            if (sectionMatch && !line.match(/\[\d+:\d+\.\d+\]/)) {
+              currentSection = sectionMatch[1];
+              continue;
+            }
+            
+            // Buscar tiempos [mm:ss.xx]
+            const timeMatch = line.match(/\[(\d+):(\d+)\.(\d+)\](.*)/);
+            if (timeMatch) {
+              const minutes = parseFloat(timeMatch[1]);
+              const seconds = parseFloat(timeMatch[2]);
+              const milliseconds = parseFloat(timeMatch[3]) / 100;
+              const text = timeMatch[4].trim();
+              
+              // Convertir a segundos totales
+              const totalSeconds = minutes * 60 + seconds + milliseconds;
+              
+              if (text && !text.includes('BTS') && !text.includes('MAP OF THE SOUL') && 
+                  !text.includes('Boy With Luv') && !text.includes('www.megalobiz.com')) {
+                lyrics.push({
+                  time: totalSeconds,
+                  text: text,
+                  section: currentSection
+                });
+              }
+            }
+          }
+          
+          return lyrics;
+        }
+
+        const lyrics = parseLRC(lrcText);
+        let currentLyricIndex = -1;
+        let isSyncing = false;
+        let lastSection = "";
+        let syncOffset = 0; // Ajuste de sincronización en segundos
+
+        // Función para renderizar la letra
+        function renderLyrics() {
+          lyricsDisplay.innerHTML = lyrics.map((line, index) => 
+            `<div class="lyric-line" data-index="${index}" data-section="${line.section}"
+                  style="margin: 8px 0; padding: 5px 10px; border-radius: 8px; transition: all 0.3s ease;">
+              ${line.text}
+            </div>`
+          ).join('');
+        }
+
+        // Función para sincronizar la letra con el audio
+        function syncLyrics() {
+          if (!audioElement || !isSyncing) return;
+          
+          const currentTime = audioElement.currentTime + syncOffset;
+          let newIndex = -1;
+          
+          // Encontrar el verso actual basado en el tiempo exacto
+          for (let i = lyrics.length - 1; i >= 0; i--) {
+            if (currentTime >= lyrics[i].time) {
+              newIndex = i;
+              break;
+            }
+          }
+          
+          // Actualizar solo si cambió el verso
+          if (newIndex !== currentLyricIndex) {
+            currentLyricIndex = newIndex;
+            updateLyricsDisplay();
+            
+            // Actualizar sección actual
+            if (currentLyricIndex >= 0) {
+              const currentSection = lyrics[currentLyricIndex].section;
+              if (currentSection !== lastSection) {
+                lastSection = currentSection;
+                if (currentSectionEl) {
+                  currentSectionEl.textContent = currentSection;
+                }
+              }
+              
+              // Scroll automático al verso actual
+              scrollToCurrentLyric();
+            }
+          }
+        }
+
+        // Actualizar la visualización de la letra
+        function updateLyricsDisplay() {
+          const lines = lyricsDisplay.querySelectorAll('.lyric-line');
+          lines.forEach((line, index) => {
+            if (index === currentLyricIndex) {
+              line.classList.add('active');
+              line.style.cssText = `
+                background: linear-gradient(90deg, rgba(255,107,129,0.12), rgba(255,200,210,0.06));
+                color: #ff6b81;
+                font-weight: 700;
+                transform: scale(1.02);
+                border-left: 3px solid #ff6b81;
+                margin: 10px 0;
+                padding: 8px 12px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+              `;
+            } else {
+              line.classList.remove('active');
+              line.style.cssText = `
+                color: ${Math.abs(index - currentLyricIndex) <= 2 ? '#7a5a5a' : '#b8a6a9'};
+                opacity: ${Math.abs(index - currentLyricIndex) <= 2 ? 1 : 0.6};
+                transform: scale(1);
+                margin: 8px 0;
+                padding: 5px 10px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+              `;
+            }
+          });
+        }
+
+        // Hacer scroll al verso actual
+        function scrollToCurrentLyric() {
+          const activeLine = lyricsDisplay.querySelector('.lyric-line.active');
+          if (activeLine) {
+            activeLine.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'center' 
+            });
+          }
+        }
+
+        // Ajustar sincronización
+        function adjustSync() {
+          const adjustment = prompt(
+            'Ajuste de sincronización (en segundos):\n' +
+            'Número positivo = letra más tarde\n' +
+            'Número negativo = letra más temprano\n' +
+            'Actual: ' + syncOffset.toFixed(2) + 's',
+            syncOffset.toFixed(2)
+          );
+          
+          if (adjustment !== null) {
+            syncOffset = parseFloat(adjustment) || 0;
+            currentLyricIndex = -1; // Forzar actualización
+            if (currentSectionEl) {
+              currentSectionEl.textContent = `Ajuste: ${syncOffset > 0 ? '+' : ''}${syncOffset.toFixed(2)}s`;
+            }
+          }
+        }
+
+        // Iniciar sincronización cuando se reproduce el audio
+        function startSync() {
+          isSyncing = true;
+          if (currentSectionEl) {
+            currentSectionEl.textContent = "Sincronización activada 🎵";
+          }
+        }
+
+        // Detener sincronización cuando se pausa el audio
+        function stopSync() {
+          isSyncing = false;
+          if (currentSectionEl && !audioElement.ended) {
+            currentSectionEl.textContent = "Pausado ⏸️";
+          }
+        }
+
+        // Event listeners
+        resetBtn.addEventListener('click', function() {
+          currentLyricIndex = -1;
+          lastSection = "";
+          syncOffset = 0;
+          updateLyricsDisplay();
+          lyricsDisplay.scrollTo({ top: 0, behavior: 'smooth' });
+          if (currentSectionEl) {
+            currentSectionEl.textContent = "Letra reiniciada 🔄";
+          }
+        });
+
+        adjustSyncBtn.addEventListener('click', adjustSync);
+
+        // Controlar sincronización automáticamente
+        audioElement.addEventListener('play', startSync);
+        audioElement.addEventListener('pause', stopSync);
+        audioElement.addEventListener('ended', function() {
+          isSyncing = false;
+          if (currentSectionEl) {
+            currentSectionEl.textContent = "Canción terminada ✨";
+          }
+        });
+        audioElement.addEventListener('timeupdate', syncLyrics);
+
+        // También iniciar sincronización si el audio ya está reproduciéndose
+        if (!audioElement.paused) {
+          startSync();
+        }
+
+        // Inicializar
+        renderLyrics();
+      }
+
+      // Llamar a la función de inicialización
+      setTimeout(initBTSLyrics, 1000);
+
       // ========== JUEGO COMPLETO CON 14 NIVELES TROLL ==========
+      // ... (el resto del código del juego permanece igual)
       (function(){
         const canvas = document.getElementById('gameCanvas');
         if(!canvas) return;
