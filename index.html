@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#fff9f7" />
+  <meta name="description" content="Una carta especial para Sheyla con mucho amor" />
   <title>Querida Sheyla 🤍</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤍</text></svg>">
 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,700;1,900&family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
+    :root {
       --bg: #fff9f7;
       --card: #ffffff;
       --accent: #ff6b81;
@@ -17,191 +22,761 @@
       --radius: 18px;
       --maxwidth: 1150px;
       --paper: #fffaf6;
+      --shadow-1: 0 24px 80px rgba(56,43,43,0.08);
+      --shadow-2: 0 8px 28px rgba(56,43,43,0.04);
+      --shadow-3: 0 8px 20px rgba(0,0,0,0.04);
+      --focus: 2px solid rgba(255,107,129,0.35);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
+
+    * { 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
       background: linear-gradient(180deg, var(--paper) 0%, #fff7f4 60%);
       font-family: 'Quicksand', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color:var(--ink);
-      padding:22px 18px 42px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      color: var(--ink);
+      padding: 22px 18px 42px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
     }
 
-    .wrap{
-      width:100%;
-      max-width:var(--maxwidth);
+    .wrap {
+      width: 100%;
+      max-width: var(--maxwidth);
       background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.995));
-      border-radius:22px;
-      box-shadow: 0 24px 80px rgba(56,43,43,0.08);
-      padding:28px;
-      position:relative;
-      overflow:visible;
+      border-radius: 22px;
+      box-shadow: var(--shadow-1);
+      padding: 28px;
+      position: relative;
+      overflow: visible;
     }
 
-    .wrap::before, .wrap::after{
-      content:"";
-      position:absolute;
-      width:360px;
-      height:360px;
-      border-radius:50%;
-      opacity:0.06;
-      pointer-events:none;
-      transform-origin:center;
+    .wrap::before, .wrap::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      opacity: 0.06;
+      pointer-events: none;
+      transform-origin: center;
       animation: slow-spin 20s linear infinite;
+      z-index: 0;
     }
-    .wrap::before{ right:-140px; top:-120px; background: radial-gradient(circle at 30% 30%, #ffdfe6, transparent 40%); transform: rotate(12deg); }
-    .wrap::after{ left:-140px; bottom:-120px; background: radial-gradient(circle at 70% 70%, #fff1f3, transparent 40%); transform: rotate(-6deg); }
-    @keyframes slow-spin { from{transform:rotate(0);} to{transform:rotate(360deg);} }
 
-    header{text-align:center;margin-bottom:12px}
-    .lead{ font-size:15px; color:var(--muted); margin-bottom:6px; font-style:italic; opacity:0.98; }
-    h1{ font-family: 'Great Vibes', cursive; font-size:60px; margin:6px 0 0 0; color:#6a333a; line-height:1; text-shadow: 0 2px 6px rgba(106,51,58,0.04); }
-    .meta{ color:var(--muted); font-size:13px; margin-top:6px; }
+    .wrap::before { 
+      right: -140px; 
+      top: -120px; 
+      background: radial-gradient(circle at 30% 30%, #ffdfe6, transparent 40%); 
+      transform: rotate(12deg); 
+    }
 
-    main{ margin-top:18px; display:grid; grid-template-columns: 1fr 380px; gap:22px; padding-right:8px; align-items:start; }
-    .content{ min-width:0; max-height:78vh; overflow:auto; padding-right:12px; scroll-behavior:smooth; }
-    .card{ background:var(--card); border-radius:16px; padding:20px; box-shadow: 0 6px 28px rgba(56,43,43,0.05); margin-bottom:16px; line-height:1.6; position:relative; transition:transform .18s ease; }
-    .card:hover{ transform: translateY(-4px); }
-    h2{ font-family: 'Playfair Display', serif; font-size:20px; margin:0 0 8px 0; color:#5b3336; }
-    p{ margin:10px 0; color:var(--ink); font-size:15px; white-space:pre-wrap; }
-    .quote{ border-left:4px solid var(--accent); padding-left:12px; margin:12px 0; font-style:italic; color:#5a4042; background: linear-gradient(90deg, rgba(255,107,129,0.03), rgba(255,200,210,0.02)); border-radius:8px; padding:12px; }
-    ul{ margin:8px 0 8px 20px; } li{ margin:6px 0; }
+    .wrap::after { 
+      left: -140px; 
+      bottom: -120px; 
+      background: radial-gradient(circle at 70% 70%, #fff1f3, transparent 40%); 
+      transform: rotate(-6deg); 
+    }
 
-    aside{ min-width:0; position:sticky; top:26px; align-self:start; max-height:78vh; overflow:auto; }
-    .card.side{ display:flex; flex-direction:column; gap:12px; align-items:center; text-align:center; padding:18px; }
-    .avatar{ width:120px; height:120px; border-radius:999px; background:linear-gradient(180deg,#fff,#fff0); display:flex; align-items:center; justify-content:center; font-size:48px; box-shadow:0 10px 30px rgba(106,51,58,0.06); transform:translateY(0); transition:transform .28s cubic-bezier(.2,.9,.3,1); }
-    .avatar:hover{ transform:translateY(-6px) rotate(-4deg); }
-    .tiny{ color:var(--muted); font-size:13px; line-height:1.4; }
-    .hearts{ display:flex; gap:10px; margin-top:8px; } .heart{ width:46px; height:46px; border-radius:12px; display:inline-grid; place-items:center; border:1px solid rgba(106,51,58,0.06); font-size:20px; color:var(--accent); background: linear-gradient(180deg,#fff,#fff6) }
+    @keyframes slow-spin { 
+      from { transform: rotate(0); } 
+      to { transform: rotate(360deg); } 
+    }
 
-    footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
-    .signature{ margin-top:8px; font-weight:700; color:#4a2b2d; font-size:15px; }
+    /* Respeto a usuarios con reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .wrap::before, .wrap::after { animation: none; }
+      .card:hover { transform: none; }
+      .avatar:hover { transform: none; }
+      .message, #secretModal, #secretOverlay { transition: none; }
+      html { scroll-behavior: auto; }
+    }
 
-    @media (max-width:980px){ main{ grid-template-columns: 1fr; } .avatar{ width:96px; height:96px; font-size:40px; } }
+    /* Header Styles */
+    header {
+      text-align: center;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
 
-    /* Juego */
-    .canvas-container { padding: 14px; border-radius: 16px; background: linear-gradient(180deg,#fff,#fff8f8); box-shadow: 0 8px 28px rgba(56,43,43,0.04); }
-    canvas#gameCanvas{ width:100%; height:auto; display:block; border-radius:8px; background:linear-gradient(180deg,#fff6f8,#fff0f2); box-shadow:0 8px 20px rgba(0,0,0,0.04); border:1px solid rgba(106,51,58,0.03); }
-    .controls{ display:flex; gap:8px; justify-content:center; margin-top:8px; flex-wrap: wrap;}
-    .btn{ padding:8px 12px; border-radius:999px; border:1px solid rgba(56,43,43,0.06); background:white; cursor:pointer; font-weight:700; color:#5b3336; transition:transform .12s ease, background .12s ease; }
-    .btn:hover{ background:#fff3f5; transform:translateY(-2px); }
-    .small{ font-size:13px; color:var(--muted); }
+    .lead { 
+      font-size: 15px; 
+      color: var(--muted); 
+      margin-bottom: 6px; 
+      font-style: italic; 
+      opacity: 0.98; 
+    }
 
-    .title{font-weight:800;color:#5b3336;margin-bottom:6px;text-align:center}
-    .ui{display:flex;gap:10px;justify-content:center;margin-top:8px;flex-wrap:wrap}
-    .badge{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border:1px solid rgba(0,0,0,0.06);border-radius:999px;background:#fff;font-weight:700;color:#5b3336}
-    .status{margin-top:6px;text-align:center;font-weight:700;color:#5b3336;min-height:20px}
-    .message{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,0.14);padding:10px 14px;font-weight:800;color:#6a333a;opacity:0;pointer-events:none;transition:opacity .2s ease; z-index: 1001;}
-    .message.show{opacity:1;pointer-events:auto}
+    h1 { 
+      font-family: 'Great Vibes', cursive; 
+      font-size: clamp(42px, 8vw, 60px);
+      margin: 6px 0 0 0; 
+      color: #6a333a; 
+      line-height: 1; 
+      text-shadow: 0 2px 6px rgba(106,51,58,0.04); 
+    }
 
-    #secretModal{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(0.98); min-width:300px; max-width:90%; padding:18px; background:linear-gradient(180deg,#fff,#fff9f7); border-radius:14px; box-shadow:0 30px 80px rgba(0,0,0,0.25); opacity:0; pointer-events:none; transition:transform .22s cubic-bezier(.2,.9,.3,1), opacity .22s ease; z-index:1000; text-align:center; }
-    #secretModal.visible{ transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto; }
-    #secretModal h3{ margin:6px 0 10px 0; font-family:'Great Vibes',cursive; font-size:28px; color:#6a333a;}
-    
-    /* --- CAMBIO 1: AÑADIDO 'white-space: pre-wrap' --- */
-    #secretModal p{ margin:8px 0; font-weight:700; color:#5b3336; white-space: pre-wrap; }
-    
-    #secretModal button{ margin-top:10px; padding:8px 12px; border-radius:999px; border:1px solid rgba(56,43,43,0.06); background:white; cursor:pointer; font-weight:700; }
+    .meta { 
+      color: var(--muted); 
+      font-size: 13px; 
+      margin-top: 6px; 
+    }
 
-    #secretOverlay{ position:fixed; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.14)); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:999; }
-    #secretOverlay.visible{ opacity:1; pointer-events:auto; }
+    /* Main Content Layout */
+    main { 
+      margin-top: 18px; 
+      display: grid; 
+      grid-template-columns: 1fr 380px; 
+      gap: 22px; 
+      padding-right: 8px; 
+      align-items: start; 
+      position: relative;
+      z-index: 1;
+    }
 
-    .page-secret { position: absolute; background: transparent; border: none; font-size:20px; cursor:pointer; transform: translate(-50%,-50%); opacity:0.95; transition: transform .22s ease, filter .22s ease, opacity .2s; }
-    .page-secret:hover { transform: translate(-50%,-50%) scale(1.18); filter: drop-shadow(0 6px 18px rgba(255,107,129,0.22)); }
-    .page-secret:focus{ outline:2px solid rgba(255,107,129,0.25); border-radius:12px; }
+    .content { 
+      min-width: 0; 
+      max-height: 80vh; 
+      overflow: auto; 
+      padding-right: 12px; 
+      scroll-behavior: smooth; 
+    }
 
-    .signature-card{
-      border-radius:14px;
-      padding:14px;
+    /* Card Styles */
+    .card { 
+      background: var(--card); 
+      border-radius: 16px; 
+      padding: 20px; 
+      box-shadow: 0 6px 28px rgba(56,43,43,0.05); 
+      margin-bottom: 16px; 
+      line-height: 1.6; 
+      position: relative; 
+      transition: transform .18s ease, box-shadow .18s ease; 
+    }
+
+    .card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 10px 35px rgba(56,43,43,0.08);
+    }
+
+    h2 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: clamp(18px, 4vw, 20px);
+      margin: 0 0 8px 0; 
+      color: #5b3336; 
+    }
+
+    p { 
+      margin: 10px 0; 
+      color: var(--ink); 
+      font-size: 15px; 
+      white-space: pre-wrap; 
+    }
+
+    .quote { 
+      border-left: 4px solid var(--accent); 
+      padding-left: 12px; 
+      margin: 12px 0; 
+      font-style: italic; 
+      color: #5a4042; 
+      background: linear-gradient(90deg, rgba(255,107,129,0.03), rgba(255,200,210,0.02)); 
+      border-radius: 8px; 
+      padding: 12px; 
+    }
+
+    ul { 
+      margin: 8px 0 8px 20px; 
+    } 
+
+    li { 
+      margin: 6px 0; 
+    }
+
+    /* Sidebar */
+    aside { 
+      min-width: 0; 
+      position: sticky; 
+      top: 26px; 
+      align-self: start; 
+      max-height: 80vh; 
+      overflow: auto; 
+    }
+
+    .card.side { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px; 
+      align-items: center; 
+      text-align: center; 
+      padding: 18px; 
+    }
+
+    .avatar { 
+      width: 120px; 
+      height: 120px; 
+      border-radius: 999px; 
+      background: linear-gradient(180deg,#fff,#fff0); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 48px; 
+      box-shadow: 0 10px 30px rgba(106,51,58,0.06); 
+      transform: translateY(0); 
+      transition: transform .28s cubic-bezier(.2,.9,.3,1); 
+    }
+
+    .avatar:hover { 
+      transform: translateY(-6px) rotate(-4deg); 
+    }
+
+    .tiny { 
+      color: var(--muted); 
+      font-size: 13px; 
+      line-height: 1.4; 
+    }
+
+    .hearts { 
+      display: flex; 
+      gap: 10px; 
+      margin-top: 8px; 
+    } 
+
+    .heart { 
+      width: 46px; 
+      height: 46px; 
+      border-radius: 12px; 
+      display: inline-grid; 
+      place-items: center; 
+      border: 1px solid rgba(106,51,58,0.06); 
+      font-size: 20px; 
+      color: var(--accent); 
+      background: linear-gradient(180deg,#fff,#fff6);
+      transition: transform .2s ease;
+    }
+
+    .heart:hover {
+      transform: scale(1.1);
+    }
+
+    footer { 
+      margin-top: 18px; 
+      text-align: center; 
+      color: var(--muted); 
+      font-size: 13px; 
+      position: relative;
+      z-index: 1;
+    }
+
+    .signature { 
+      margin-top: 8px; 
+      font-weight: 700; 
+      color: #4a2b2d; 
+      font-size: 15px; 
+    }
+
+    /* Responsive Design */
+    @media (max-width: 980px) {
+      main { 
+        grid-template-columns: 1fr; 
+        padding-right: 0;
+      }
+      
+      .content {
+        padding-right: 0;
+        max-height: none;
+      }
+      
+      aside {
+        position: static;
+        max-height: none;
+      }
+      
+      .avatar { 
+        width: 96px; 
+        height: 96px; 
+        font-size: 40px; 
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 12px 10px 24px;
+      }
+      
+      .wrap {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+      
+      .wrap::before, .wrap::after {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .wrap::before {
+        right: -80px;
+        top: -60px;
+      }
+      
+      .wrap::after {
+        left: -80px;
+        bottom: -60px;
+      }
+    }
+
+    /* Juego - Estilos Mejorados */
+    .canvas-container { 
+      padding: 14px; 
+      border-radius: 16px; 
+      background: linear-gradient(180deg,#fff,#fff8f8); 
+      box-shadow: var(--shadow-2); 
+    }
+
+    canvas#gameCanvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      background: linear-gradient(180deg,#fff6f8,#fff0f2);
+      box-shadow: var(--shadow-3);
+      border: 1px solid rgba(106,51,58,0.03);
+      outline: none;
+      max-width: 100%;
+    }
+
+    .controls { 
+      display: flex; 
+      gap: 8px; 
+      justify-content: center; 
+      margin-top: 8px; 
+      flex-wrap: wrap;
+    }
+
+    .btn { 
+      padding: 8px 12px; 
+      border-radius: 999px; 
+      border: 1px solid rgba(56,43,43,0.06); 
+      background: white; 
+      cursor: pointer; 
+      font-weight: 700; 
+      color: #5b3336; 
+      transition: transform .12s ease, background .12s ease, box-shadow .12s ease; 
+      font-family: inherit;
+    }
+
+    .btn:hover { 
+      background: #fff3f5; 
+      transform: translateY(-2px); 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .btn:focus { 
+      outline: var(--focus);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .small { 
+      font-size: 13px; 
+      color: var(--muted); 
+    }
+
+    .title {
+      font-weight: 800;
+      color: #5b3336;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .ui {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 999px;
+      background: #fff;
+      font-weight: 700;
+      color: #5b3336;
+      font-size: 14px;
+    }
+
+    .status {
+      margin-top: 6px;
+      text-align: center;
+      font-weight: 700;
+      color: #5b3336;
+      min-height: 20px;
+      font-size: 14px;
+    }
+
+    /* Mensajes flash mejorados */
+    .message {
+      position: fixed;
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+      padding: 10px 14px;
+      font-weight: 800;
+      color: #6a333a;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 1001;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .message.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Modal secretos mejorado */
+    #secretModal {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%) scale(0.98);
+      min-width: 300px;
+      max-width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 18px;
+      background: linear-gradient(180deg,#fff,#fff9f7);
+      border-radius: 14px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .22s cubic-bezier(.2,.9,.3,1), opacity .22s ease;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    #secretModal.visible { 
+      transform: translate(-50%,-50%) scale(1); 
+      opacity: 1; 
+      pointer-events: auto; 
+    }
+
+    #secretModal h3 { 
+      margin: 6px 0 10px 0; 
+      font-family: 'Great Vibes',cursive; 
+      font-size: 28px; 
+      color: #6a333a;
+    }
+
+    #secretModal p { 
+      margin: 8px 0; 
+      font-weight: 700; 
+      color: #5b3336; 
+      white-space: pre-wrap; 
+    }
+
+    #secretModal button { 
+      margin-top: 10px; 
+      padding: 8px 12px; 
+      border-radius: 999px; 
+      border: 1px solid rgba(56,43,43,0.06); 
+      background: white; 
+      cursor: pointer; 
+      font-weight: 700; 
+      font-family: inherit;
+    }
+
+    #secretModal button:focus { 
+      outline: var(--focus);
+    }
+
+    #secretModal button:hover {
+      background: #fff3f5;
+    }
+
+    #secretOverlay { 
+      position: fixed; 
+      inset: 0; 
+      background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.14)); 
+      opacity: 0; 
+      pointer-events: none; 
+      transition: opacity .2s ease; 
+      z-index: 999; 
+    }
+
+    #secretOverlay.visible { 
+      opacity: 1; 
+      pointer-events: auto; 
+    }
+
+    /* Botones de secreto mejorados */
+    .page-secret {
+      position: absolute; 
+      background: transparent; 
+      border: none; 
+      font-size: 20px; 
+      cursor: pointer;
+      transform: translate(-50%,-50%); 
+      opacity: 0.95; 
+      transition: transform .22s ease, filter .22s ease, opacity .2s;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .page-secret:hover { 
+      transform: translate(-50%,-50%) scale(1.18); 
+      filter: drop-shadow(0 6px 18px rgba(255,107,129,0.22)); 
+    }
+
+    .page-secret:focus { 
+      outline: var(--focus); 
+      border-radius: 12px; 
+    }
+
+    /* Firma mejorada */
+    .signature-card {
+      border-radius: 14px;
+      padding: 14px;
       background: linear-gradient(180deg, rgba(255,245,246,0.75), rgba(255,250,250,0.6));
-      border:1px solid rgba(255,107,129,0.06);
+      border: 1px solid rgba(255,107,129,0.06);
       box-shadow: 0 10px 30px rgba(106,51,58,0.03);
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content:space-between;
-      margin-top:12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
     }
-    .sig-left{ display:flex; gap:12px; align-items:center; }
-    .sig-avatar{ width:64px; height:64px; border-radius:12px; background:linear-gradient(180deg,#fff,#ffecec); display:grid; place-items:center; font-size:30px; color:#9b3b43; box-shadow:0 6px 18px rgba(106,51,58,0.04); transform:translateY(0); transition:transform .18s ease; }
-    .sig-avatar:hover{ transform:translateY(-6px); }
-    .sig-text{ text-align:left; }
-    .sig-title{ font-weight:800; color:#5b3336; font-size:15px; }
-    .sig-sub{ font-size:12px; color:var(--muted); }
 
-    .flair { display:inline-block; padding:6px 10px; background: linear-gradient(90deg,#fff8, #fff2); border-radius:999px; border:1px solid rgba(255,107,129,0.06); font-size:13px; color:#8a383f; font-weight:700; }
+    .sig-left { 
+      display: flex; 
+      gap: 12px; 
+      align-items: center; 
+    }
+
+    .sig-avatar { 
+      width: 64px; 
+      height: 64px; 
+      border-radius: 12px; 
+      background: linear-gradient(180deg,#fff,#ffecec); 
+      display: grid; 
+      place-items: center; 
+      font-size: 30px; 
+      color: #9b3b43; 
+      box-shadow: 0 6px 18px rgba(106,51,58,0.04); 
+      transform: translateY(0); 
+      transition: transform .18s ease; 
+    }
+
+    .sig-avatar:hover { 
+      transform: translateY(-6px); 
+    }
+
+    .sig-text { 
+      text-align: left; 
+    }
+
+    .sig-title { 
+      font-weight: 800; 
+      color: #5b3336; 
+      font-size: 15px; 
+    }
+
+    .sig-sub { 
+      font-size: 12px; 
+      color: var(--muted); 
+    }
+
+    .flair { 
+      display: inline-block; 
+      padding: 6px 10px; 
+      background: linear-gradient(90deg,#fff8, #fff2); 
+      border-radius: 999px; 
+      border: 1px solid rgba(255,107,129,0.06); 
+      font-size: 13px; 
+      color: #8a383f; 
+      font-weight: 700; 
+    }
+
+    /* Indicador de carga para recursos */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,107,129,0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Navegación entre secciones */
+    .nav-dots {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,107,129,0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .nav-dots {
+        display: none;
+      }
+    }
+
+    /* Mejoras para el reproductor de audio */
+    .player-wrap {
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .player-title {
+      font-weight: 600;
+      color: #5b3336;
+      margin-bottom: 8px;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    audio:focus {
+      outline: var(--focus);
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap" role="article" aria-label="Carta para Sheyla">
     <header>
-      <div class="lead">Todo lo que siento por ti, guardadito para que lo recuerdes 🤍</div>
+      <div class="lead">Pues algo que decir antes de que leas hice esto con mucho cariño y espero que te guste mi princesa</div>
       <h1>Querida Sheyla 🤍</h1>
-      <div class="meta">01/16/2025</div>
+      <div class="meta">19/09/2025</div>
     </header>
 
     <main>
-      <section class="content" id="content">
+      <section class="content" id="content" aria-label="Contenido principal">
+        
         <article class="card" id="page-1" aria-labelledby="intro-title">
-          <h2 id="intro-title">Introducción — esto es todo lo que guardé</h2>
-          <p>Desde el día en que te conocí (ese 16 de enero que ahora parece una fecha con magia), guardé en mi cabeza y en pequeñas notas todo lo que sentía. Esto no es algo improvisado: es un pedazo de mi tiempo, pensado para ti, para que lo lees cuando quieras y recuerdes cómo me pongo cuando pienso en ti.</p>
-          <p>No es un texto perfecto ni una carta de novela; es mi voz con errores, con risas raras (JSAKJSKAJKSA) y con la verdad al desnudo. Si alguna frase suena torpe, es porque es sincera. Si alguna suena intensa, es porque así me sentí. Y si algo te hace sonrojar, es parte del plan. 🤍</p>
-          <button class="page-secret" data-secret="Eres mi mejor casualidad 🤍" style="left:88%; top:22%;">🤍</button>
+          <h2 id="intro-title">Introducción</h2>
+          <p>Hice esto para recordarte todo lo que significas para mi.
+Espero te guste 🤍</p>
+          <button class="page-secret" data-secret="Eres mi mejor casualidad 🤍" style="left:88%; top:22%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-2" aria-labelledby="primera-title">
-          <h2 id="primera-title">La primera vez que te vi</h2>
-          <p>Recuerdo ese momento como si fuera una foto medio borrosa pero con el color más fuerte: te vi con curiosidad en la mirada, preguntando cosas, y esa forma tuya de interesarte me atrapó. No había planes, solo una sensación rara en el pecho que ahora entiendo mejor. 🤍</p>
-          <button class="page-secret" data-secret="Mi corazón supo tu nombre desde ese día ✨" style="left:82%; top:66%;">🤍</button>
+          <h2 id="primera-title">Que paso por mi mente la primera vez que te vi</h2>
+          <p>La primera vez que te vi, tan inocente y tan curiosa por las cosas que hablaba sobre mi me pareciste demasiado interesante y me acerque a hablarte, en mi mente solo tenia:</p>
+          <div class="quote">"¿Por qué tiene tanta curiosidad?"
+"¿Por qué con ella si quiero hablar?"</div>
+          <p>Realmente son cosas que al día de hoy no se explicar, simplemente quise acercarme y hablar contigo y conocerte mas de cerca.</p>
+          <button class="page-secret" data-secret="Mi corazón supo tu nombre desde ese día ✨" style="left:82%; top:66%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-3" aria-labelledby="equivoco-title">
-          <h2 id="equivoco-title">En qué me equivoqué (y por qué me río de eso)</h2>
-          <p>Hubo muchas cosas que pensé mal al principio. Creí que sería otra cosa pasajera, que quizá solo serías una amiga más. Me dio miedo confesar lo que sentía por miedo a perder lo que ya teníamos; así que me escondí detrás de bromas, mensajes y silencios.</p>
-          <button class="page-secret" data-secret="Me equivoqué de miedo, no de amor." style="left:18%; top:30%;">🤍</button>
+          <h2 id="equivoco-title">¿Qué es lo primero que pensé cuando te conocí y en qué me equivoqué?</h2>
+          <p>JSAKJSKAJKSA, me da mucha risa ver lo equivocado que estaba.
+Porque para mi que no esperaba estar con nadie quise estar relacionado contigo instantáneamente aunque fuera "un mejor amigo siquiera" o eso esperaba porque me daba miedo expresar que me gustaste y en tan poco.</p>
+          <p>Me daba miedo que al decirte "¿Quieres ser mi novia?" y me dijeras que no perdiéramos la amistad que teníamos en esos momentos pero eso es una historia que ya tu conoces así que hablemos mas de lo que no sabes.</p>
+          <p>Pense que serias como las chicas con las que hablaba siempre y que tan Equivocado estaba eres linda, me escuchas, me respetas, me entiendes Y me encanta tu forma de ser y humor de todas las formas posibles.</p>
+          <button class="page-secret" data-secret="Me equivoqué de miedo, no de amor." style="left:18%; top:30%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-4" aria-labelledby="valoro-title">
-          <h2 id="valoro-title">Lo que más valoro de nosotros</h2>
-          <p>Valoro la sinceridad, esa que no necesita adornos. Valoro cuando me miras con esa calma que parece decir “todo va a estar bien”. Valoro que no dejemos que una pelea sea el final, sino la oportunidad de entendernos mejor. 🤍</p>
-          <button class="page-secret" data-secret="Tu calma me salva. Tu risa me encuentra." style="left:14%; top:24%;">🤍</button>
+          <h2 id="valoro-title">¿Qué es lo que más valoro de nuestra relación?</h2>
+          <p>Valoro demasiado la conexión que tenemos y que aunque discutamos. O yo te haga enojar siempre estamos ahí para darnos apoyo.</p>
+          <p>Que una pelea no se nos hace un momento de rabia donde nos arrepentimos por cosas que decimos ya que siempre que sucede nos quedamos pensando en que es culpa de nosotros mismos pero nunca de la otra persona puede parecer algo tonto pero esos momentos donde discutimos y dejamos de hablar nos sentimos mal los dos, es una relación donde no existe el desinterés siempre es un interés abismal por parte de los dos.</p>
+          <button class="page-secret" data-secret="Tu calma me salva. Tu risa me encuentra." style="left:14%; top:24%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-5" aria-labelledby="siento-title">
-          <h2 id="siento-title">Lo que siento contigo</h2>
-          <p>Lo que siento es casi imposible de explicar sin sonar dramático: ganas de cuidarte, de protegerte, pero también de compartir momentos chiquitos que, al final, son los que más cuentan. No quiero que suene intenso porque sí; es que realmente me importa todo lo que te pasa.</p>
-          <div class="quote">Eres mi mejor elección. Y lo diré así, simple y claro.</div>
-          <button class="page-secret" data-secret="Elegirte es mi decisión favorita." style="left:72%; top:36%;">🤍</button>
+          <h2 id="siento-title">¿Qué siento contigo?</h2>
+          <p>Siento esas ganas de protegerte constantemente, que no te pase nada malo. No importa si el que debe sufrir soy yo, si algún día tienes algo soy capaz de dar mi vida si eso significa que tu te sientas aunque sea un poco mejor.</p>
+          <p>Quiero que siempre sepas que suceda lo que suceda siempre tendrás mi apoyo y mi amor eres una de las pocas decisiones con las que puedo decir "Pensaste bien esta vez". Esperar por ti y no abandonarte ese día fue mi mejor elección y orgullosamente siempre lo dire.</p>
+          <div class="quote">Eres mi mejor elección.</div>
+          <button class="page-secret" data-secret="Elegirte es mi decisión favorita." style="left:72%; top:36%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-6" aria-labelledby="futuro-title">
-          <h2 id="futuro-title">Nuestro futuro (lo que imagino)</h2>
-          <p>Cuando imagino el futuro, no veo castillos ni grandes promesas de película; imagino rutinas contigo: desayunos desordenados, días donde trabajamos y nos contamos el error del día, y noches donde reímos hasta quedarnos dormidos. Eso para mí ya es mucho. 🤍</p>
-          <button class="page-secret" data-secret="Nuestro futuro sabe a café y domingos juntos ☕🤍" style="left:50%; top:18%;">🤍</button>
+          <h2 id="futuro-title">Nuestro futuro</h2>
+          <p>Hablamos constantemente de nuestro futuro pero aquí quiero dejarte escrito que quiero un futuro contigo y no importa lo que suceda y lo me cueste o tarde QUIERO QUE SEAS TU.</p>
+          <p>No importa si debo comenzar desde cero para estar contigo, si debo viajar si debo trabajar 22 horas del día. Porque se que las 2 horas que me sobran las disfrutare como nunca y el cansancio y el estrés serán inexistentes.</p>
+          <p>Asi que nunca pienses que no quiero hablar contigo porque hablar contigo me calma, no se si me entiendes simplemente eres mi lugar seguro en cualquier situación.</p>
+          <button class="page-secret" data-secret="Nuestro futuro sabe a café y domingos juntos ☕🤍" style="left:50%; top:18%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-7" aria-labelledby="promesas-title">
-          <h2 id="promesas-title">Promesas (promesas con intención)</h2>
+          <h2 id="promesas-title">Prometo que siempre...</h2>
           <ul>
-            <li>Prometo cuidarte y pedir ayuda cuando no alcance mi fuerza.</li>
-            <li>Prometo preocuparme por tu salud y tu paz más que por mi orgullo.</li>
-            <li>Prometo ser leal: en acciones pequeñas y grandes.</li>
-            <li>Prometo aprender a comunicarme mejor, a decir cuando me siento mal en vez de cerrarme.</li>
-            <li>Prometo intentarlo siempre, aunque falle, porque mi intención será regresar y corregir.</li>
+            <li>Prometo que siempre te apoyare y nunca te dejare de amar.</li>
+            <li>Prometo cuidarte a costa de mi vida.</li>
+            <li>Prometo pensar mas en tu salud que en la mia.</li>
+            <li>Prometo serte leal en cualquier momento.</li>
+            <li>Y prometo amarte por siempre y si en algún momento sientes que no es así Tenme un poco de paciencia que eres la primera niña que me ha gustado desde que tengo razón.</li>
           </ul>
-          <button class="page-secret" data-secret="Prometerte es cuidarte en lo pequeño." style="left:22%; top:64%;">🤍</button>
+          <button class="page-secret" data-secret="Prometerte es cuidarte en lo pequeño." style="left:22%; top:64%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-8" aria-labelledby="gracias-title">
-          <h2 id="gracias-title">Gracias por…</h2>
-          <p>Gracias por elegir quedarte, incluso en momentos donde no me cuidé. Gracias por no alejarte al conocer mi pasado; gracias por darme la oportunidad de ser alguien distinto junto a ti. 🤍</p>
-          <button class="page-secret" data-secret="Gracias por quedarte incluso cuando yo no sabía cómo." style="left:84%; top:42%;">🤍</button>
+          <h2 id="gracias-title">Gracias por...</h2>
+          <p>Gracias por amarme y hacerme feliz todos los días, Gracias por entenderme y que soy idiota algunas veces y digo cosas que no gustan, gracias por no alejarte al saber que tuve un pasado donde era mierda, gracias por estar conmigo y darme la seguridad aunque sean por celos bobos gracias por regañarme cuando vez que estoy haciendo algo malo.</p>
+          <p>En resumen gracias por cambiarme y permitirme amarte de esta manera.</p>
+          <button class="page-secret" data-secret="Gracias por quedarte incluso cuando yo no sabía cómo." style="left:84%; top:42%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-9" aria-labelledby="cancion-title">
@@ -209,73 +784,54 @@
           <p>Hay una melodía que, sin decir mucho, siempre me trae a ti. No hablo de versos ni de frases; hablo de esa sensación que me da escuchar algo y sentir que te tengo un poquito más cerca.</p>
 
           <div class="quote" style="text-align:center;">
-              <a href="https://music.youtube.com/watch?v=sUZOuXo2Bp8&si=jnc7BJ2nh2Sy32l2" target="_blank" style="text-decoration:none; color:#ff6b81; font-weight:bold;">
-                  ▶ Escuchar (la canción que siempre me recuerda a ti) 🤍
-              </a>
+            <a href="https://music.youtube.com/watch?v=sUZOuXo2Bp8&si=jnc7BJ2nh2Sy32l2" target="_blank" rel="noopener" style="text-decoration:none; color:#ff6b81; font-weight:bold;">
+              ▶ Escuchar (la canción que siempre me recuerda a ti) 🤍
+            </a>
           </div>
 
-          <div class="player-wrap" aria-label="Reproductor de nuestra canción" style="margin-top:6px">
+          <div class="player-wrap" aria-label="Reproductor de nuestra canción">
             <div class="player-title">Nuestra canción (presiona Play)</div>
-            <audio id="loveSong" controls>
-              <source src="/Así%20Te%20Pedí%20-%20Zeri.mp3" type="audio/mpeg">
+            <audio id="loveSong" controls preload="metadata">
+              <source src="asi-te-pedi-zeri.mp3" type="audio/mpeg">
               Tu navegador no soporta audio.
             </audio>
-            <div class="tiny" style="text-align:center; margin-top:6px;">Presiona Play para escucharla. Si el nombre con acentos da problemas, renómbrala a /asi-te-pedi-zeri.mp3 y cambia esta ruta.</div>
+            <div class="tiny" style="text-align:center; margin-top:6px;">(Asegúrate que 'asi-te-pedi-zeri.mp3' esté en la misma carpeta)</div>
           </div>
 
           <div style="width:100%; margin-top:18px;">
             <div class="canvas-container" aria-label="Área de juego y controles">
               <div class="title">Shey Level Devil — 14 niveles TROLL 🤍</div>
-
               <canvas id="gameCanvas" width="900" height="480" tabindex="0" aria-label="Mini juego para Sheyla"></canvas>
 
-              <div class="ui">
+              <div class="ui" aria-live="polite">
                 <div class="badge">Nivel: <span id="levelLabel">1</span></div>
                 <div class="badge">Intentos: <span id="triesLabel">0</span></div>
                 <div class="badge">Power-up: <span id="powerLabel">❌ Sin doble salto</span></div>
               </div>
 
               <div class="controls" style="margin-top:8px">
-                <button id="restartBtn" class="btn">Reiniciar</button>
-                <button id="nextBtn" class="btn">Siguiente nivel</button>
+                <button id="restartBtn" class="btn" type="button">Reiniciar</button>
+                <button id="nextBtn" class="btn" type="button" aria-describedby="status">Siguiente nivel</button>
               </div>
 
-              <div id="status" class="status">Nivel 1 — calentando, suave como café con pan 🤍</div>
+              <div id="status" class="status" role="status" aria-live="polite">Nivel 1 — Cuidado dónde pisas... 🤍</div>
             </div>
           </div>
 
-          <button class="page-secret" data-secret="Dale Play y quédate conmigo un ratito." style="left:10%; top:20%;">🤍</button>
-        </article>
-
-        <article class="card" id="page-10" aria-labelledby="significas-title">
-          <h2 id="significas-title">Lo mucho que significas para mí</h2>
-          <p>Princesa, eres todo para mí. Esta parte de la página es para recordarte cada que vengas y lo leas, además de lo que tanto te lo recuerdo cuando vamos a dormir o cuando me dan ataques de amor.</p>
-          <button class="page-secret" data-secret="Mi lugar favorito siempre será a tu lado." style="left:74%; top:40%;">🤍</button>
-        </article>
-
-        <article class="card" id="page-11" aria-labelledby="pdf-title">
-          <h2 id="pdf-title">Aquí hay otra cosita para ti ✨</h2>
-          <p>Mi princesa, no todo lo que siento podía caber en esta página. Por eso, he guardado un documento especial solo para ti, lleno de más cosas que quiero recordarte.</p>
-          <div class="quote" style="text-align:center;">
-              <a href="https://drive.google.com/file/d/1RHUHGqlFmizHURG8fprh7Ev59fcAruEW/view?usp=sharing" target="_blank" style="text-decoration:none; color:#ff6b81; font-weight:bold;">
-                  📄 Abrir el documento secreto (PDF) 🤫
-              </a>
-          </div>
-          <p class="tiny" style="text-align:center; margin-top:10px;">(¡Ya está el enlace! Entra cuando quieras, mi niña. Te amo. 💖)</p>
-          <button class="page-secret" data-secret="Lo que no te digo en voz alta, también te lo guardo." style="left:68%; top:24%;">🤍</button>
+          <button class="page-secret" data-secret="Dale Play y quédate conmigo un ratito." style="left:10%; top:20%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
         <article class="card" id="page-12" aria-labelledby="final-title">
-          <h2 id="final-title">El Final, sellado con mi Corazón 🤍</h2>
-          <p>Esto no es un cierre, es el inicio de todo lo que quiero construir contigo. Es una caja de palabras que guardé con el más puro y blanco de mis cariños. Guárdala, imprímela, léela, pero sobre todo, recuerda que cada línea tiene un pedacito de mi alma, entregado solo para ti.</p>
-          <p>Mi vida, mi niña, <strong>TE AMO con toda la fuerza y la sinceridad de mi corazón. Eres mi todo, hoy y siempre.</strong></p>
+          <h2 id="final-title">Y esto seria todo princesa 🤍</h2>
+          <p>espero que te allá gustado este pequeño regalo de mi parte, TE AMO demasiado mi niña.
+Eres mi todo.</p>
 
           <div class="signature-card" style="margin-top:12px">
             <div class="sig-left">
-              <div class="sig-avatar">S</div>
+              <div class="sig-avatar" aria-hidden="true">S</div>
               <div class="sig-text">
                 <div class="sig-title">Con todo mi corazón — Samuel 🤍</div>
-                <div class="sig-sub">01/16/2025 · Guardado para ti</div>
+                <div class="sig-sub">19/09/2025 · Guardado para ti</div>
               </div>
             </div>
             <div style="text-align:right">
@@ -283,36 +839,26 @@
             </div>
           </div>
 
-          <button class="page-secret" data-secret="Hoy y siempre, contigo. 🤍" style="left:92%; top:18%;">🤍</button>
-        </article>
-
-        <article class="card" id="page-13" aria-labelledby="extra13-title">
-          <h2 id="extra13-title">Un recuerdo más</h2>
-          <p>Aquí otro pedacito pequeño de lo que somos: un lugar, una risa, una canción que suena a nosotros. 🤍</p>
-          <button class="page-secret" data-secret="Tu nombre le queda perfecto a mis planes." style="left:60%; top:30%;">🤍</button>
-        </article>
-
-        <article class="card" id="page-14" aria-labelledby="extra14-title">
-          <h2 id="extra14-title">Cierre íntimo</h2>
-          <p>Si llegaste hasta aquí, gracias. Todo esto es para ti, para recordarte que te elijo siempre.</p>
-          <button class="page-secret" data-secret="Te elijo en el amanecer y también en el cansancio." style="left:26%; top:70%;">🤍</button>
+          <button class="page-secret" data-secret="Hoy y siempre, contigo. 🤍" style="left:92%; top:18%;" aria-label="Secreto romántico">🤍</button>
         </article>
 
       </section>
 
-      <aside>
+      <aside aria-label="Resumen y nota">
         <div class="card side" aria-labelledby="sidebar-title">
           <div id="sidebar-title" style="font-weight:800;color:#5b3336">Un resumen bonito</div>
           <div class="avatar" aria-hidden="true">🤍</div>
-          <div class="tiny">Guardado con cuidado desde 01/16/2025 — un texto hecho para ti, con risas, promesas y muchas ganas de verte.</div>
-          <div class="hearts" aria-hidden="true"><div class="heart">♥</div><div class="heart">❣</div><div class="heart">💫</div></div>
+          <div class="tiny">Guardado con cuidado desde 19/09/2025 — un texto hecho para ti, con risas, promesas y muchas ganas de verte.</div>
+          <div class="hearts" aria-hidden="true">
+            <div class="heart">♥</div><div class="heart">❣</div><div class="heart">💫</div>
+          </div>
 
           <div class="signature-card" style="margin-top:10px; width:100%;">
             <div class="sig-left">
-              <div class="sig-avatar">S</div>
+              <div class="sig-avatar" aria-hidden="true">S</div>
               <div class="sig-text">
                 <div class="sig-title">Con todo mi corazón, Samuel 🤍</div>
-                <div class="sig-sub">01/16/2025 · Guardado para ti</div>
+                <div class="sig-sub">19/09/2025 · Guardado para ti</div>
               </div>
             </div>
           </div>
@@ -334,802 +880,980 @@
     </footer>
   </div>
 
+  <!-- Navegación por puntos -->
+  <div class="nav-dots" id="navDots" aria-label="Navegación entre secciones"></div>
+
+  <!-- Modal para secretos -->
   <div id="secretOverlay" aria-hidden="true"></div>
-  <div id="secretModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <h3>Secreto</h3>
+  <div id="secretModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="secretTitle">
+    <h3 id="secretTitle">Secreto</h3>
     <p id="secretText">my princess 🤍 i love u</p>
-    <button id="closeSecretBtn">Cerrar</button>
+    <button id="closeSecretBtn" type="button" aria-label="Cerrar diálogo">Cerrar</button>
   </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    /* ---------- AUDIO FX (suave) ---------- */
-    let audioCtx = null;
-    function ensureAudio() {
-      if (!audioCtx) {
-        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-        catch (e) { audioCtx = null; }
-      }
-    }
-    function resumeAudioIfNeeded() {
-      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
-    }
-    document.addEventListener('click', ()=> { ensureAudio(); resumeAudioIfNeeded(); }, { once: true });
-
-    function playTone(freq, type='sine', duration=0.12, gain=0.12, when=0, detune=0) {
-      if (!audioCtx) { ensureAudio(); if(!audioCtx) return; }
-      const t = audioCtx.currentTime + when;
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = type; o.frequency.setValueAtTime(freq, t); o.detune.value = detune;
-      g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(gain, t + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + duration);
-      o.connect(g); g.connect(audioCtx.destination);
-      o.start(t); o.stop(t + duration + 0.02);
-    }
-
-    const sfx = {
-      jump(){ playTone(420,'sine',0.08,0.12); },
-      double(){ playTone(520,'triangle',0.12,0.14); playTone(660,'sine',0.09,0.08,0.05); },
-      power(){ playTone(880,'sine',0.18,0.15); playTone(1320,'triangle',0.12,0.08,0.06); },
-      hit(){ playTone(180,'sawtooth',0.14,0.18); },
-      ok(){ playTone(620,'sine',0.12,0.14); playTone(780,'sine',0.12,0.12,0.06); playTone(980,'triangle',0.18,0.08,0.12); },
-      modal(){ playTone(720,'sine',0.14,0.16); playTone(940,'sine',0.12,0.08,0.06); },
-      secret(){ playTone(1020,'triangle',0.12,0.14); }
-    };
-
-    /* ---------- SECRETOS ---------- */
-    const pageSecrets = Array.from(document.querySelectorAll('.page-secret'));
-    const secretModal = document.getElementById('secretModal');
-    const secretOverlay = document.getElementById('secretOverlay');
-    const secretTextEl = document.getElementById('secretText');
-    const closeSecretBtn = document.getElementById('closeSecretBtn');
-
-    function showSecret(text){
-      secretTextEl.textContent = text;
-      secretModal.classList.add('visible');
-      secretOverlay.classList.add('visible');
-      sfx.modal();
-      closeSecretBtn.focus();
-    }
-    function hideSecret(){
-      secretModal.classList.remove('visible');
-      secretOverlay.classList.remove('visible');
-    }
-
-    pageSecrets.forEach(btn=>{
-      btn.setAttribute('aria-label','Secreto romántico');
-      btn.addEventListener('click', ()=>{
-        const t = btn.dataset.secret || 'my princess 🤍 i love u';
-        sfx.secret();
-        showSecret(t);
-      });
-      btn.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
-      });
-    });
-
-    closeSecretBtn.addEventListener('click', hideSecret);
-    secretOverlay.addEventListener('click', hideSecret);
-    document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') hideSecret(); });
-
-    /* ---------- JUEGO INTEGRADO (14 niveles, balanceado) ---------- */
-    (function(){
-      const canvas = document.getElementById('gameCanvas');
-      if(!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.width, H = canvas.height;
-
-      const levelLabel = document.getElementById('levelLabel');
-      const triesLabel = document.getElementById('triesLabel');
-      const powerLabel = document.getElementById('powerLabel');
-      const statusEl = document.getElementById('status');
-
-      // Mensajes flash
-      const flashEl = document.createElement('div');
-      flashEl.id = 'msg';
-      flashEl.className = 'message';
-      document.body.appendChild(flashEl);
-      function flashMessage(text, time=1800){
-        flashEl.textContent = text;
-        flashEl.classList.add('show');
-        setTimeout(()=> flashEl.classList.remove('show'), time);
-      }
-
-      const mensajes = [
-        "Desde el día en que te conocí, todo cambió 🤍", // Nivel 1
-        "Mi corazón supo tu nombre desde ese día ✨", // Nivel 2
-        "Me equivoqué de miedo, no de amor.", // Nivel 3
-        "Tu calma me salva. Tu risa me encuentra.", // Nivel 4
-        "Elegirte es mi decisión favorita.", // Nivel 5
-        "Nuestro futuro sabe a café y domingos juntos ☕🤍", // Nivel 6
-        "Prometerte es cuidarte en lo pequeño.", // Nivel 7
-        "Gracias por quedarte incluso cuando yo no sabía cómo.", // Nivel 8
-        "Dale Play y quédate conmigo un ratito.", // Nivel 9
-        "Mi lugar favorito siempre será a tu lado.", // Nivel 10
-        "Lo que no te digo en voz alta, también te lo guardo.", // Nivel 11
-        "Hoy y siempre, contigo. 🤍", // Nivel 12
-        "Tu nombre le queda perfecto a mis planes.", // Nivel 13
-        "Te elijo en el amanecer y también en el cansancio." // Nivel 14
-      ];
-
-      // Input
-      const keys = {left:false,right:false,jump:false};
-      canvas.addEventListener('keydown', (e)=>{
-        const k = e.key;
-        if(['ArrowLeft','ArrowRight','ArrowUp',' '].includes(k)) e.preventDefault();
-        if(k==='ArrowLeft') keys.left=true;
-        if(k==='ArrowRight') keys.right=true;
-        if(k==='ArrowUp' || k===' ') keys.jump=true;
-      });
-      canvas.addEventListener('keyup', (e)=>{
-        const k = e.key;
-        if(k==='ArrowLeft') keys.left=false;
-        if(k==='ArrowRight') keys.right=false;
-        if(k==='ArrowUp' || k===' ') keys.jump=false;
-      });
-      canvas.addEventListener('click', ()=> { canvas.focus(); });
-
-      // Player con calidad de vida (coyote + buffer)
-      const playerBase = {
-        x:48,y:H-120,w:32,h:40,
-        vx:0,vy:0,
-        onGround:false,
-        hasDouble:false,hasJumpedOnce:false,
-        alive:true,
-        coyoteTime:0,
-        jumpBuffer:0
-      };
-      const COYOTE_MAX = 0.12;    // 120 ms
-      const JUMP_BUFFER_MAX = 0.12;// 120 ms
-      const GRAV = 0.58;
-      const JUMP_V = -12.0;       // ajustado
-      const DOUBLE_V = -10.8;     // ajustado
-      const MAX_VX = 4.0;
-      const ACCEL = 0.9;
-      const FRICTION_GROUND = 0.85;
-      const FRICTION_AIR = 0.93;
-
-      let player = {...playerBase};
-      let currentLevel = 0;
-      let tries = 0;
-      let levelTries = {}; // Contador de muertes por nivel
-
-      // Sistema de Partículas
-      let particles = [];
-      const PARTICLE_GRAV = 0.1;
+  <script>
+    // Inicialización cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+      // ========== MEJORAS DE RENDIMIENTO Y ACCESIBILIDAD ==========
       
-      function emitParticles(x, y, count, color) {
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: x, y: y,
-            vx: (Math.random() - 0.5) * 6,
-            vy: (Math.random() - 0.5) * 6 - 3,
-            life: Math.random() * 30 + 30, // 0.5 a 1 segundo
-            color: color
+      // Precarga de recursos críticos
+      function preloadCriticalResources() {
+        const criticalImages = [];
+        criticalImages.forEach(src => {
+          const img = new Image();
+          img.src = src;
+        });
+      }
+      
+      // Navegación por puntos entre secciones
+      function initSectionNavigation() {
+        const sections = document.querySelectorAll('.card');
+        const navDots = document.getElementById('navDots');
+        
+        if (!navDots) return;
+        
+        // Crear puntos de navegación
+        sections.forEach((section, index) => {
+          const dot = document.createElement('div');
+          dot.className = 'nav-dot';
+          dot.setAttribute('aria-label', `Ir a sección ${index + 1}`);
+          dot.addEventListener('click', () => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          navDots.appendChild(dot);
+        });
+        
+        // Actualizar punto activo al hacer scroll
+        function updateActiveDot() {
+          const scrollPos = window.scrollY + 100;
+          
+          sections.forEach((section, index) => {
+            const dot = navDots.children[index];
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
           });
         }
-      }
-      // Efecto "Ash" (Ceniza) al morir
-      function emitAsh(x, y) {
-        emitParticles(x + player.w / 2, y + player.h / 2, 20, '#aaaaaa');
+        
+        window.addEventListener('scroll', updateActiveDot);
+        updateActiveDot(); // Inicializar
       }
       
-      function updateParticles() {
-        for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.vy += PARTICLE_GRAV;
-          p.x += p.vx;
-          p.y += p.vy;
-          p.life--;
-          if (p.life <= 0) {
-            particles.splice(i, 1);
+      // ========== SISTEMA DE AUDIO MEJORADO ==========
+      let audioCtx = null;
+      let isAudioEnabled = false;
+      
+      function ensureAudio() {
+        if (!audioCtx) {
+          try { 
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)(); 
+            console.log("AudioContext creado correctamente");
+          } catch(e) { 
+            console.warn('AudioContext no soportado:', e);
+            audioCtx = null; 
           }
         }
       }
-      function drawParticles() {
-        for (const p of particles) {
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.life / 60; // Desvanecer
-          ctx.fillRect(p.x - 2, p.y - 2, 4, 4);
-          ctx.globalAlpha = 1.0;
+      
+      function resumeAudioIfNeeded() {
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume().then(() => {
+            isAudioEnabled = true;
+            console.log("AudioContext reanudado");
+          }).catch((e) => {
+            console.warn("Error reanudando AudioContext:", e);
+          });
+        } else if (audioCtx) {
+          isAudioEnabled = true;
         }
       }
-      // Fin Sistema de Partículas
-
-      function rr(x,y,w,h,r=6,fill='#fff',stroke='#e6d4d6'){
-        ctx.beginPath(); ctx.moveTo(x+r,y);
-        ctx.arcTo(x+w,y,x+w,y+h,r);
-        ctx.arcTo(x+w,y+h,x,y+h,r);
-        ctx.arcTo(x,y+h,x,y,r);
-        ctx.arcTo(x,y,x+w,y,r);
-        ctx.closePath(); ctx.fillStyle=fill; ctx.fill(); ctx.strokeStyle=stroke; ctx.stroke();
-      }
-      function drawSpike(x,y,w=20,h=16){
-        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w/2,y-h); ctx.lineTo(x+w,y); ctx.closePath();
-        ctx.fillStyle = '#c33'; ctx.fill();
-      }
-      function drawHeart(x,y,r=12){
-        ctx.save(); ctx.translate(x,y); ctx.fillStyle='#ff6b81';
-        ctx.beginPath();
-        ctx.moveTo(0, r/2);
-        ctx.bezierCurveTo(r, -r/2, r*1.4, r/1.6, 0, r*1.4);
-        ctx.bezierCurveTo(-r*1.4, r/1.6, -r, -r/2, 0, r/2);
-        ctx.fill(); ctx.restore();
-      }
-      function drawStar(x,y,r=10){
-        ctx.save(); ctx.translate(x,y); ctx.fillStyle='#ffd86b';
-        ctx.beginPath();
-        for(let i=0;i<5;i++){
-          const a = i*2*Math.PI/5 - Math.PI/2;
-          ctx.lineTo(Math.cos(a)*r, Math.sin(a)*r);
-          const a2 = a + Math.PI/5;
-          ctx.lineTo(Math.cos(a2)*r*0.5, Math.sin(a2)*r*0.5);
+      
+      // Desbloquear audio con la primera interacción
+      const unlockAudio = () => { 
+        ensureAudio(); 
+        resumeAudioIfNeeded(); 
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('keydown', unlockAudio);
+      };
+      
+      document.addEventListener('click', unlockAudio, { once: true });
+      document.addEventListener('keydown', unlockAudio, { once: true });
+      
+      // Función mejorada de sonidos
+      function playTone(freq, type='sine', duration=0.12, gain=0.12, when=0, detune=0) {
+        if (!audioCtx) { 
+          ensureAudio(); 
+          if(!audioCtx) return; 
         }
-        ctx.closePath(); ctx.fill(); ctx.restore();
-      }
-
-      const L = H; // base
-      function baseFloor(){ return [{x:0,y:L-20,w:W,h:20}]; }
-
-      // --- DEFINICIÓN DE NIVELES (ACTUALIZADA con Nivel 14) ---
-      const levels = [
-        // Nivel 1 (index 0) - TROLL PISO RESBALOSO
-        { type:'platform', bg:'warm',
-          platforms: baseFloor().concat([{x:200,y:L-120,w:140,h:16}]),
-          spikes: [],
-          goal: {x:820,y:L-40},
-          msg: 'Nivel 1 — ¡Wii, el piso resbala! 🤍',
-          powerup: null
-        },
-        // Nivel 2 (index 1) - TROLL ESTRELLA FALSA
-        { type:'platform', bg:'warm',
-          platforms: baseFloor().concat([{x:320,y:L-100,w:140,h:16}]),
-          spikes: [
-            {x:520,y:L-20,w:80, isFloor:true}, // Pincho de suelo
-            {x:380,y:L-100,w:20,h:16, isStarTroll:true} // ¡Estrella Troll!
-          ],
-          goal: {x:820,y:L-40},
-          msg: 'Nivel 2 — ¡No confíes en todo lo que brilla!',
-          powerup: null
-        },
-        // Nivel 3 (index 2) - ARREGLADO (Escalera posible)
-        { type:'platform', bg:'soft',
-          platforms: baseFloor().concat([
-            {x:220,y:L-120,w:120,h:16}, // Plataforma 1
-            {x:450,y:L-170,w:120,h:16}, // Plataforma 2 (50px jump)
-            {x:680,y:L-220,w:120,h:16}  // Plataforma 3 (50px jump)
-          ]),
-          spikes: [{x:430,y:L-20,w:100, isFloor:true}],
-          goal: {x:740,y:L-260}, // Meta en el último escalón
-          msg: 'Nivel 3 — escalones de paciencia (¡Ahora sí!).',
-          powerup: null
-        },
-        // Nivel 4 (index 3) - TROLL PLATAFORMAS (Tu idea)
-        { type:'platform', bg:'soft',
-          platforms: baseFloor().concat([
-            {x:200,y:L-140,w:120,h:16, fake:true}, // P1: Falsa (con punto)
-            {x:400,y:L-140,w:120,h:16} // P2: Real
-          ]),
-          spikes: [{x:150,y:L-20,w:420, isFloor:true}], // Pinchos más grandes
-          goal: {x:440,y:L-180},
-          msg: 'Nivel 4 — Una es real, la otra no. Elige con cuidado.',
-          powerup: null
-        },
-        // Nivel 5 (index 4) - Estándar
-        { type:'platform', bg:'warm',
-          platforms: baseFloor(),
-          moving: [{x:600,y:L-160,w:120,h:16,axis:'y',from:L-220,to:L-120,spd:0.8}],
-          spikes: [{x:320,y:L-20,w:80, isFloor:true}],
-          goal: {x:650,y:L-200},
-          msg: 'Nivel 5 — ritmo y calma.',
-          powerup: null
-        },
-        // Nivel 6 (index 5) - ARREGLADO (Plataforma corazón + Plataforma invisible)
-        { type:'platform', bg:'soft',
-          platforms: baseFloor().concat([
-            {x:200,y:L-140,w:120,h:16}, // P1: (Corazón) - Ahora alcanzable
-            {x:380,y:L-180,w:40,h:16, invisible:true}, // P2: Invisible (sin punto, casi invisible)
-            {x:550,y:L-240,w:120,h:16} // P3: Meta (Requiere doble salto)
-          ]),
-          spikes: [],
-          powerup: {x:220,y:L-170, active:true}, // Corazón (posición ajustada)
-          goal: {x:590,y:L-280}, // Meta
-          msg: 'Nivel 6 — Salta al vacío... confía 🤍'
-        },
-        // Nivel 7 (index 6) - TROLL CONTROLES INVERTIDOS
-        { type:'platform', bg:'warm',
-          platforms: baseFloor().concat([{x:520,y:L-160,w:120,h:16}]),
-          spikes: [{x:120,y:L-20,w:40, isFloor:true},{x:180,y:L-20,w:40, isFloor:true},{x:240,y:L-20,w:40, isFloor:true}],
-          goal: {x:560,y:L-200},
-          msg: 'Nivel 7 — ¡Uy! ¿Qué le pasó a los controles?',
-          powerup: null,
-          reversed: true // ¡Troll activado!
-        },
-        // Nivel 8 (index 7) - TROLL META OCULTA + MECÁNICA DE PIEDAD
-        { type:'platform', bg:'soft',
-          platforms: baseFloor().concat([{x:260,y:L-240,w:110,h:16}]), // Plataforma (Altura Difícil)
-          spikes: [{x:420,y:L-20,w:60, isFloor:true},{x:500,y:L-20,w:60, isFloor:true}],
-          goal: {x:300,y:L-280, hidden:true}, // Meta (Altura Difícil)
-          msg: 'Nivel 8 — gracias por quedarte... (¿Dónde está la meta?)',
-          powerup: null
-        },
-        // Nivel 9 (index 8) - TROLL (Plataforma Invisible)
-        { type:'platform', bg:'warm',
-          platforms: baseFloor().concat([
-            {x:450,y:L-220,w:40,h:16, invisible:true}, // Plataforma invisible (requiere Doble Salto)
-            {x:620,y:L-280,w:120,h:16} // Plataforma final
-          ]),
-          spikes: [{x:220,y:L-20,w:40, isFloor:true},{x:280,y:L-20,w:40, isFloor:true},{x:340,y:L-20,w:40, isFloor:true}],
-          goal: {x:660,y:L-320},
-          msg: 'Nivel 9 — (Necesitarás un doble salto de fe...)', // Nueva Pista
-          powerup: null
-        },
-        // Nivel 10 (index 9) - Estándar (Puzzle)
-        { type:'puzzle-switch', bg:'soft',
-          platforms: baseFloor().concat([{x:140,y:L-200,w:120,h:16},{x:380,y:L-240,w:120,h:16}]),
-          switches: [{x:160,y:L-216,w:20,h:20,active:false}],
-          doors: [{x:520,y:L-20,w:60,h:180,closed:true}], // Puerta en el suelo
-          spikes: [{x:480,y:L-20,w:80, isFloor:true}],
-          goal: {x:660,y:L-40},
-          msg: 'Nivel 10 — abre la puerta y ven conmigo.',
-          powerup: null
-        },
-        // Nivel 11 (index 10) - Estándar
-        { type:'platform', bg:'sunset',
-          platforms: baseFloor(),
-          moving: [
-            {x:220,y:L-200,w:100,h:16,axis:'x',from:160,to:300,spd:1.0},
-            {x:480,y:L-260,w:100,h:16,axis:'y',from:L-300,to:L-200,spd:0.9}
-          ],
-          spikes: [{x:200,y:L-20,w:60, isFloor:true},{x:620,y:L-20,w:60, isFloor:true}],
-          goal: {x:500,y:L-300},
-          msg: 'Nivel 11 — calma y precisión.',
-          powerup: null
-        },
-        // Nivel 12 (index 11) - TROLL SECUENCIA
-        { type:'puzzle-seq', bg:'soft',
-          platforms: baseFloor(),
-          pads: [
-            {x:160,y:L-80,w:60,h:14,color:'#6fb3ff',order:0},
-            {x:320,y:L-80,w:60,h:14,color:'#b88bff',order:1},
-            {x:480,y:L-80,w:60,h:14,color:'#7be7c7',order:2}
-          ],
-          seq: [0,1,2],
-          spikes: [{x:260,y:L-20,w:100, isFloor:true}],
-          goal: {x:640,y:L-140},
-          msg: 'Nivel 12 — orden y cariño (¡Cuidado con la secuencia!).',
-          powerup: null
-        },
-        // Nivel 13 (index 12) - Estándar
-        { type:'platform', bg:'warm',
-          platforms: baseFloor().concat([{x:500,y:L-220,w:120,h:16}]),
-          spikes: [{x:150,y:L-20,w:60, isFloor:true},{x:230,y:L-20,w:60, isFloor:true}],
-          goal: {x:560,y:L-260},
-          msg: 'Nivel 13 — tu nombre le queda perfecto a mis planes.',
-          powerup: null
-        },
-        // Nivel 14 (index 13) - TROLL DISTRACCIÓN
-        { type:'platform', bg:'sunset',
-          platforms: baseFloor().concat([{x:300,y:L-260,w:120,h:16}]),
-          spikes: [{x:420,y:L-20,w:80, isFloor:true}],
-          goal: {x:340,y:L-300, distraction:true}, // Star is a distraction, MUST NOT trigger win
-          exitWin: true, // Win by reaching the end (right side)
-          msg: 'Nivel 14 — No busques la estrella, ve hasta el final. 🤍', // Nueva pista
-          powerup: null
-        }
-      ];
-
-      let puzzle = {switches:[],doors:[],pads:[],seq:[],seqIndex:0};
-
-      function resetPlayer(withPower=false){
-        player = {...playerBase};
-        player.x = 48; player.y = H-120;
-        player.hasDouble = withPower;
-        player.hasJumpedOnce = false;
-        player.alive = true;
-        player.coyoteTime = 0;
-        player.jumpBuffer = 0;
-      }
-
-      function loadLevel(i){
-        const lv = levels[i];
-        currentLevel = i;
         
-        // Mecánica de Piedad Nivel 8
-        if (!levelTries[i]) levelTries[i] = 0; // Inicializar contador de muertes del nivel
-
-        if (i === 7) { // Nivel 8
-          const plat = lv.platforms.find(p => p.x === 260);
-          const goal = lv.goal;
+        // Asegurarnos de que el audio esté habilitado
+        if (!isAudioEnabled) {
+          resumeAudioIfNeeded();
+        }
+        
+        try {
+          const t = audioCtx.currentTime + when;
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.type = type; 
+          o.frequency.setValueAtTime(freq, t); 
+          o.detune.value = detune;
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.exponentialRampToValueAtTime(gain, t + 0.01);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+          o.connect(g); 
+          g.connect(audioCtx.destination);
+          o.start(t); 
+          o.stop(t + duration + 0.02);
+        } catch(e) {
+          console.warn('Error reproduciendo sonido:', e);
+        }
+      }
+      
+      const sfx = {
+        jump(){ playTone(420,'sine',0.08,0.12); },
+        double(){ playTone(520,'triangle',0.12,0.14); playTone(660,'sine',0.09,0.08,0.05); },
+        power(){ playTone(880,'sine',0.18,0.15); playTone(1320,'triangle',0.12,0.08,0.06); },
+        hit(){ playTone(180,'sawtooth',0.14,0.18); },
+        ok(){ playTone(620,'sine',0.12,0.14); playTone(780,'sine',0.12,0.12,0.06); playTone(980,'triangle',0.18,0.08,0.12); },
+        modal(){ playTone(720,'sine',0.14,0.16); playTone(940,'sine',0.12,0.08,0.06); },
+        secret(){ playTone(1020,'triangle',0.12,0.14); }
+      };
+      
+      // ========== SISTEMA DE SECRETOS MEJORADO ==========
+      const secretModal = document.getElementById('secretModal');
+      const secretOverlay = document.getElementById('secretOverlay');
+      const secretTextEl = document.getElementById('secretText');
+      const closeSecretBtn = document.getElementById('closeSecretBtn');
+      const pageSecrets = Array.from(document.querySelectorAll('.page-secret'));
+      
+      function showSecret(text){
+        if (!secretModal || !secretTextEl) return;
+        
+        secretTextEl.textContent = text;
+        secretModal.classList.add('visible');
+        secretOverlay.classList.add('visible');
+        sfx.modal();
+        
+        // Trampa de foco accesible:
+        closeSecretBtn.focus();
+        document.addEventListener('keydown', escClose);
+        
+        // Prevenir scroll del body
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function hideSecret(){
+        secretModal.classList.remove('visible');
+        secretOverlay.classList.remove('visible');
+        document.removeEventListener('keydown', escClose);
+        
+        // Restaurar scroll del body
+        document.body.style.overflow = '';
+      }
+      
+      function escClose(e){ 
+        if(e.key === 'Escape') hideSecret(); 
+      }
+      
+      // Inicializar botones de secretos
+      pageSecrets.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.secret || 'my princess 🤍 i love u';
+          sfx.secret();
+          showSecret(t);
+        });
+        
+        btn.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' '){ 
+            e.preventDefault(); 
+            btn.click(); 
+          }
+        });
+      });
+      
+      closeSecretBtn.addEventListener('click', hideSecret);
+      secretOverlay.addEventListener('click', hideSecret);
+      
+      // ========== JUEGO COMPLETO CON 14 NIVELES TROLL ==========
+      (function(){
+        const canvas = document.getElementById('gameCanvas');
+        if(!canvas) return;
+        
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const baseW = canvas.width, baseH = canvas.height;
+        
+        // Elementos de UI
+        const levelLabel = document.getElementById('levelLabel');
+        const triesLabel = document.getElementById('triesLabel');
+        const powerLabel = document.getElementById('powerLabel');
+        const statusEl = document.getElementById('status');
+        
+        // Mensajes flash
+        const flashEl = document.createElement('div');
+        flashEl.id = 'msg';
+        flashEl.className = 'message';
+        document.body.appendChild(flashEl);
+        let flashTimeout = null;
+        
+        function flashMessage(text, time=1800){
+          flashEl.textContent = text;
+          flashEl.classList.add('show');
+          clearTimeout(flashTimeout);
+          flashTimeout = setTimeout(() => flashEl.classList.remove('show'), time);
+        }
+        
+        // Mensajes de victoria - uno para cada nivel
+        const mensajes = [
+          "Eres mi mejor casualidad 🤍",
+          "Mi corazón supo tu nombre desde ese día ✨",
+          "Me equivoqué de miedo, no de amor.",
+          "Tu calma me salva. Tu risa me encuentra.",
+          "Elegirte es mi decisión favorita.",
+          "Nuestro futuro sabe a café y domingos juntos ☕🤍",
+          "Prometerte es cuidarte en lo pequeño.",
+          "Gracias por quedarte incluso cuando yo no sabía cómo.",
+          "Dale Play y quédate conmigo un ratito.",
+          "Mi lugar favorito siempre será a tu lado.",
+          "Lo que no te digo en voz alta, también te lo guardo.",
+          "Hoy y siempre, contigo. 🤍",
+          "Tu nombre le queda perfecto a mis planes.",
+          "Te elijo en el amanecer y también en el cansancio."
+        ];
+        
+        // Sistema de entrada mejorado
+        const keys = {left:false, right:false, jump:false};
+        
+        function handleKeyDown(e) {
+          const k = e.key;
+          if(['ArrowLeft','ArrowRight','ArrowUp',' '].includes(k)) e.preventDefault();
+          if(k==='ArrowLeft') keys.left=true;
+          if(k==='ArrowRight') keys.right=true;
+          if(k==='ArrowUp' || k===' ') keys.jump=true;
+        }
+        
+        function handleKeyUp(e) {
+          const k = e.key;
+          if(k==='ArrowLeft') keys.left=false;
+          if(k==='ArrowRight') keys.right=false;
+          if(k==='ArrowUp' || k===' ') keys.jump=false;
+        }
+        
+        // Controles táctiles para móviles
+        function initTouchControls() {
+          if ('ontouchstart' in window) {
+            const leftBtn = document.createElement('button');
+            const rightBtn = document.createElement('button');
+            const jumpBtn = document.createElement('button');
+            
+            leftBtn.textContent = '←';
+            rightBtn.textContent = '→';
+            jumpBtn.textContent = '↑';
+            
+            [leftBtn, rightBtn, jumpBtn].forEach(btn => {
+              btn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.8);
+                border: 2px solid rgba(255,107,129,0.3);
+                font-size: 24px;
+                z-index: 100;
+                touch-action: manipulation;
+              `;
+              document.body.appendChild(btn);
+            });
+            
+            leftBtn.style.left = '20px';
+            rightBtn.style.left = '100px';
+            jumpBtn.style.right = '20px';
+            
+            // Eventos táctiles
+            leftBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.left = true; });
+            leftBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.left = false; });
+            
+            rightBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.right = true; });
+            rightBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.right = false; });
+            
+            jumpBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.jump = true; });
+            jumpBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.jump = false; });
+          }
+        }
+        
+        canvas.addEventListener('keydown', handleKeyDown);
+        canvas.addEventListener('keyup', handleKeyUp);
+        canvas.addEventListener('click', () => { canvas.focus(); });
+        
+        // Player con física mejorada
+        const W = baseW, H = baseH;
+        const playerBase = {
+          x:48, y:H-120, w:32, h:40,
+          vx:0, vy:0,
+          onGround:false,
+          hasDouble:false, hasJumpedOnce:false,
+          alive:true,
+          coyoteTime:0,
+          jumpBuffer:0
+        };
+        
+        const COYOTE_MAX = 0.12;
+        const JUMP_BUFFER_MAX = 0.12;
+        const GRAV = 0.58;
+        const JUMP_V = -13.0;
+        const DOUBLE_V = -13.0;
+        const MAX_VX = 4.0;
+        const ACCEL = 0.9;
+        const FRICTION_GROUND = 0.85;
+        const FRICTION_AIR = 0.93;
+        
+        let player = {...playerBase};
+        let currentLevel = 0;
+        let tries = 0;
+        let levelTries = {};
+        
+        // Sistema de partículas mejorado
+        let particles = [];
+        const PARTICLE_GRAV = 0.1;
+        
+        function emitParticles(x, y, count, color) {
+          for (let i = 0; i < count; i++) {
+            particles.push({
+              x: x, y: y,
+              vx: (Math.random() - 0.5) * 6,
+              vy: (Math.random() - 0.5) * 6 - 3,
+              life: Math.random() * 30 + 30,
+              color: color
+            });
+          }
+        }
+        
+        function emitAsh(x, y) { 
+          emitParticles(x + player.w / 2, y + player.h / 2, 20, '#aaaaaa'); 
+        }
+        
+        function updateParticles() {
+          for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.vy += PARTICLE_GRAV;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life--;
+            if (p.life <= 0) particles.splice(i, 1);
+          }
+        }
+        
+        function drawParticles() {
+          for (const p of particles) {
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.life / 60;
+            ctx.fillRect(p.x - 2, p.y - 2, 4, 4);
+            ctx.globalAlpha = 1.0;
+          }
+        }
+        
+        // Funciones de dibujo optimizadas
+        function rr(x,y,w,h,r=6,fill='#fff',stroke='#e6d4d6'){
+          ctx.beginPath(); 
+          ctx.moveTo(x+r,y);
+          ctx.arcTo(x+w,y,x+w,y+h,r);
+          ctx.arcTo(x+w,y+h,x,y+h,r);
+          ctx.arcTo(x,y+h,x,y,r);
+          ctx.arcTo(x,y,x+w,y,r);
+          ctx.closePath(); 
+          ctx.fillStyle=fill; 
+          ctx.fill(); 
+          ctx.strokeStyle=stroke; 
+          ctx.stroke();
+        }
+        
+        function drawSpike(x,y,w=20,h=16){
+          ctx.beginPath(); 
+          ctx.moveTo(x,y); 
+          ctx.lineTo(x+w/2,y-h); 
+          ctx.lineTo(x+w,y); 
+          ctx.closePath();
+          ctx.fillStyle = '#c33'; 
+          ctx.fill();
+        }
+        
+        function drawHeart(x,y,r=12){
+          ctx.save(); 
+          ctx.translate(x,y); 
+          ctx.fillStyle='#ff6b81';
+          ctx.beginPath();
+          ctx.moveTo(0, r/2);
+          ctx.bezierCurveTo(r, -r/2, r*1.4, r/1.6, 0, r*1.4);
+          ctx.bezierCurveTo(-r*1.4, r/1.6, -r, -r/2, 0, r/2);
+          ctx.fill(); 
+          ctx.restore();
+        }
+        
+        function drawStar(x,y,r=10){
+          ctx.save(); 
+          ctx.translate(x,y); 
+          ctx.fillStyle='#ffd86b';
+          ctx.beginPath();
+          for(let i=0;i<5;i++){
+            const a = i*2*Math.PI/5 - Math.PI/2;
+            ctx.lineTo(Math.cos(a)*r, Math.sin(a)*r);
+            const a2 = a + Math.PI/5;
+            ctx.lineTo(Math.cos(a2)*r*0.5, Math.sin(a2)*r*0.5);
+          }
+          ctx.closePath(); 
+          ctx.fill(); 
+          ctx.restore();
+        }
+        
+        // Niveles del juego - 14 NIVELES TROLL
+        const L = H;
+        function baseFloor(){ return [{x:0,y:L-20,w:W,h:20}]; }
+        
+        const levels = [
+          // Nivel 1 - Plataforma falsa con pinchos
+          { type:'platform', bg:'warm',
+            platforms: baseFloor().concat([
+              {x:200,y:L-120,w:140,h:16, fake:true},
+              {x:400,y:L-140,w:120,h:16}
+            ]),
+            spikes: [{x:200,y:L-20,w:140, isFloor:true}],
+            goal: {x:440,y:L-180},
+            msg: 'Nivel 1 — Cuidado dónde pisas... 🤍',
+            powerup: null
+          },
           
-          if (levelTries[i] >= 3 && plat) {
-            // Si ha muerto 3+ veces, aplicar piedad
-            plat.y = L - 220; // Bajarla 20px (de L-240 a L-220)
-            goal.y = L - 260; // Bajar meta 20px (de L-280 a L-260)
-            lv.msg = 'Nivel 8 — (Te bajé la plataforma un poquito 🤍)';
-          } else {
-            // Asegurarse de que esté en la altura DIFÍCIL original
-            if (plat) plat.y = L - 240; 
-            if (goal) goal.y = L - 280;
-            // Mensaje original
-            if (lv.goal.hidden) {
-              lv.msg = 'Nivel 8 — gracias por quedarte... (¿Dónde está la meta?)';
+          // Nivel 2 - Estrella troll
+          { type:'platform', bg:'warm',
+            platforms: baseFloor().concat([
+              {x:320,y:L-100,w:140,h:16},
+              {x:520,y:L-160,w:40,h:16, invisible:true}
+            ]),
+            spikes: [
+              {x:380,y:L-100,w:20,h:16, isStarTroll:true}
+            ],
+            goal: {x:820,y:L-40},
+            msg: 'Nivel 2 — No confíes en todo lo que brilla.',
+            powerup: null
+          },
+          
+          // Nivel 3 - Power-up de doble salto
+          { type:'platform', bg:'soft',
+            platforms: baseFloor().concat([
+              {x:220,y:L-120,w:120,h:16},
+              {x:450,y:L-220,w:120,h:16},
+              {x:680,y:L-220,w:120,h:16, fake:true}
+            ]),
+            spikes: [{x:430,y:L-20,w:100, isFloor:true}],
+            goal: {x:510,y:L-260},
+            powerup: {x:250,y:L-150, active:true},
+            msg: 'Nivel 3 — Tómalo. Lo vas a necesitar (creo).'
+          },
+          
+          // Nivel 4 - Controles invertidos
+          { type:'platform', bg:'soft',
+            platforms: baseFloor().concat([
+              {x:200,y:L-140,w:120,h:16},
+              {x:400,y:L-140,w:120,h:16}
+            ]),
+            spikes: [{x:150,y:L-20,w:420, isFloor:true}],
+            goal: {x:440,y:L-180},
+            msg: 'Nivel 4 — ¿Soy yo, o todo está al revés? JSKJS.',
+            powerup: null,
+            reversed: true
+          },
+          
+          // Nivel 5 - Meta falsa
+          { type:'platform', bg:'warm',
+            platforms: baseFloor(),
+            moving: [{x:600,y:L-160,w:120,h:16,axis:'y',from:L-220,to:L-120,spd:0.8}],
+            spikes: [{x:320,y:L-20,w:80, isFloor:true}],
+            goal: {x:800,y:L-40, distraction:true},
+            msg: 'Nivel 5 — No todo lo que brilla es la meta.',
+            powerup: null,
+            exitWin: true
+          },
+          
+          // Nivel 6 - Plataformas invisibles
+          { type:'platform', bg:'soft',
+            platforms: baseFloor().concat([
+              {x:200,y:L-140,w:120,h:16},
+              {x:380,y:L-180,w:40,h:16, invisible:true},
+              {x:550,y:L-240,w:120,h:16, invisible:true},
+            ]),
+            spikes: [{x:200,y:L-20,w:W-200, isFloor:true}],
+            goal: {x:750,y:L-40},
+            msg: 'Nivel 6 — Salta al vacío... confía en mí 🤍'
+          },
+          
+          // Nivel 7 - Plataforma trampa
+          { type:'platform', bg:'warm',
+            platforms: baseFloor().concat([
+              {x:520,y:L-160,w:120,h:16, fake:true},
+              {x:520,y:L-220,w:120,h:16}
+            ]),
+            spikes: [{x:120,y:L-20,w:380, isFloor:true}],
+            goal: {x:560,y:L-260},
+            msg: 'Nivel 7 — La de abajo es una trampa, obvio.',
+            powerup: null
+          },
+          
+          // Nivel 8 - Meta oculta
+          { type:'platform', bg:'soft',
+            platforms: baseFloor().concat([{x:260,y:L-240,w:110,h:16}]),
+            spikes: [
+              {x:420,y:L-20,w:60, isFloor:true},
+              {x:500,y:L-20,w:60, isFloor:true},
+              {x:380,y:L-240,w:20,h:16, isStarTroll:true}
+            ],
+            goal: {x:300,y:L-280, hidden:true},
+            msg: 'Nivel 8 — A veces hay que caerse para ver el camino.',
+            powerup: null
+          },
+          
+          // Nivel 9 - Necesitas doble salto
+          { type:'platform', bg:'warm',
+            platforms: baseFloor().concat([
+              {x:450,y:L-220,w:40,h:16, invisible:true},
+              {x:620,y:L-280,w:120,h:16}
+            ]),
+            spikes: [
+              {x:220,y:L-20,w:40, isFloor:true},
+              {x:280,y:L-20,w:40, isFloor:true},
+              {x:340,y:L-20,w:40, isFloor:true},
+              {x:620,y:L-20,w:120, isFloor:true}
+            ],
+            goal: {x:660,y:L-320},
+            msg: 'Nivel 9 — (Necesitarás un doble salto de fe...)',
+            powerup: null
+          },
+          
+          // Nivel 10 - Interruptor trampa
+          { type:'puzzle-switch', bg:'soft',
+            platforms: baseFloor().concat([
+              {x:140,y:L-200,w:120,h:16, fake:true},
+              {x:380,y:L-240,w:120,h:16}
+            ]),
+            switches: [{x:160,y:L-216,w:20,h:20,active:false}],
+            doors: [{x:520,y:L-20,w:60,h:180,closed:true}],
+            spikes: [{x:140,y:L-20,w:120, isFloor:true}],
+            goal: {x:660,y:L-40},
+            msg: 'Nivel 10 — Rápido, que el piso es mentira.',
+            powerup: null
+          },
+          
+          // Nivel 11 - Plataformas móviles
+          { type:'platform', bg:'sunset',
+            platforms: baseFloor(),
+            moving: [
+              {x:220,y:L-200,w:100,h:16,axis:'x',from:160,to:300,spd:1.0},
+              {x:480,y:L-260,w:100,h:16,axis:'y',from:L-300,to:L-200,spd:0.9}
+            ],
+            spikes: [
+              {x:160,y:L-20,w:140, isFloor:true},
+              {x:620,y:L-20,w:60, isFloor:true}
+            ],
+            goal: {x:500,y:L-300},
+            msg: 'Nivel 11 — Calma y precisión... y no te caigas.',
+            powerup: null
+          },
+          
+          // Nivel 12 - Secuencia tramposa
+          { type:'puzzle-seq', bg:'soft',
+            platforms: baseFloor().concat([
+               {x:480,y:L-80,w:60,h:14, fake:true}
+            ]),
+            pads: [
+              {x:160,y:L-80,w:60,h:14,color:'#6fb3ff',order:0},
+              {x:320,y:L-80,w:60,h:14,color:'#b88bff',order:1},
+              {x:480,y:L-80,w:60,h:14,color:'#7be7c7',order:2}
+            ],
+            seq: [0,1,2],
+            spikes: [{x:260,y:L-20,w:100, isFloor:true}, {x:480,y:L-20,w:60, isFloor:true}],
+            goal: {x:640,y:L-140},
+            msg: 'Nivel 12 — 1, 2, 3... ¡Uy! (Salto rápido al final).',
+            powerup: null
+          },
+          
+          // Nivel 13 - Salto imposible
+          { type:'platform', bg:'warm',
+            platforms: baseFloor().concat([
+              {x:250,y:L-140,w:120,h:16},
+              {x:450,y:L-180,w:40,h:16, invisible:true},
+              {x:700,y:L-220,w:120,h:16}
+            ]),
+            spikes: [{x:150,y:L-20,w:W-150, isFloor:true}],
+            goal: {x:760,y:L-260},
+            msg: 'Nivel 13 — Usa el triple salto (ups, no hay).',
+            powerup: null
+          },
+          
+          // Nivel 14 - Meta final troll
+          { type:'platform', bg:'sunset',
+            platforms: baseFloor().concat([
+              {x:300,y:L-260,w:120,h:16},
+              {x:500,y:L-200,w:120,h:16, fake:true}
+            ]),
+            spikes: [{x:420,y:L-20,w:80, isFloor:true}, {x:500,y:L-20,w:120, isFloor:true}],
+            goal: {x:340,y:L-300, distraction:true},
+            exitWin: true,
+            msg: 'Nivel 14 — No busques la estrella, ve hasta el final. 🤍',
+            powerup: null
+          }
+        ];
+        
+        let puzzle = {switches:[],doors:[],pads:[],seq:[],seqIndex:0};
+        
+        function setStatus(text){ 
+          if (statusEl) statusEl.textContent = text; 
+        }
+        
+        function loadLevel(i){
+          const lv = levels[i];
+          currentLevel = i;
+          
+          if (!levelTries[i]) levelTries[i] = 0;
+          
+          // Piedad para el Nivel 8 (Meta Oculta)
+          if (i === 7) {
+            const plat = lv.platforms.find(p => p.x === 260);
+            const goal = lv.goal;
+            if (levelTries[i] >= 3 && plat && goal) {
+              plat.y = L - 220;
+              goal.y = L - 260;
+              lv.msg = 'Nivel 8 — (Te bajé la plataforma un poquito 🤍)';
             } else {
-              lv.msg = 'Nivel 8 — (¡Necesitas el doble salto!)';
+              if (plat) plat.y = L - 240;
+              if (goal) goal.y = L - 280;
+              lv.msg = lv.goal.hidden
+                ? 'Nivel 8 — A veces hay que caerse para ver el camino.'
+                : 'Nivel 8 — (¡Necesitas el doble salto!)';
             }
           }
-        }
-        // Fin Mecánica de Piedad
-
-        levelLabel.textContent = i+1;
-        statusEl.textContent = lv.msg || `Nivel ${i+1}`;
-        powerLabel.textContent = player.hasDouble ? '✅ Doble salto' : '❌ Sin doble salto';
-
-        puzzle = {switches:[],doors:[],pads:[],seq:lv.seq||[],seqIndex:0};
-        if(lv.switches) puzzle.switches = lv.switches.map(s=>({...s}));
-        if(lv.doors) puzzle.doors = lv.doors.map(d=>({...d}));
-        if(lv.pads) puzzle.pads = lv.pads.map(p=>({...p,activated:false}));
-
-        resetPlayer(player.hasDouble);
-      }
-
-      function drawBG(lv){
-        if(lv.bg==='sunset'){
-          const g = ctx.createLinearGradient(0,0,0,H);
-          g.addColorStop(0,'#ffd6c9'); g.addColorStop(1,'#fff8f6');
-          ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-          ctx.beginPath(); ctx.fillStyle = 'rgba(255,200,160,0.18)'; ctx.arc(W-120,80,64,0,Math.PI*2); ctx.fill();
-        } else if (lv.bg==='soft'){
-          const g = ctx.createLinearGradient(0,0,0,H);
-          g.addColorStop(0,'#f8fbff'); g.addColorStop(1,'#fef8fb');
-          ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-        } else {
-          const g = ctx.createLinearGradient(0,0,0,H);
-          g.addColorStop(0,'#fffaf6'); g.addColorStop(1,'#fff7f8');
-          ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-        }
-      }
-
-      function handleJump(){
-        if(!player.alive) return;
-        const canGroundJump = player.onGround || player.coyoteTime > 0;
-        if(canGroundJump && player.jumpBuffer > 0){
-          player.vy = JUMP_V; player.onGround=false; player.hasJumpedOnce=true; player.jumpBuffer=0; player.coyoteTime=0;
-          sfx.jump();
-          if(currentLevel !== 0) statusEl.textContent = 'Salto — suave.';
-          return;
-        }
-        if(player.hasDouble && player.hasJumpedOnce && player.jumpBuffer > 0){
-          player.vy = DOUBLE_V; player.hasJumpedOnce=false; player.jumpBuffer=0;
-          sfx.double();
-          statusEl.textContent = 'Doble salto activado 💖';
-        }
-      }
-
-      function update(){
-        const lv = levels[currentLevel];
-
-        // TROLL 1 & 7: Controles y Fricción
-        const isReversed = !!lv.reversed;
-        let friction = player.onGround ? FRICTION_GROUND : FRICTION_AIR;
-        
-        // Nivel 1 (index 0) es resbaloso
-        if (currentLevel === 0 && player.onGround) {
-            friction = 0.98; // Muy resbaloso
-            if(Math.abs(player.vx) > 1 && player.alive) statusEl.textContent = '¡Wiiii, resbala!';
+          
+          levelLabel.textContent = i+1;
+          setStatus(lv.msg || `Nivel ${i+1}`);
+          powerLabel.textContent = player.hasDouble ? '✅ Doble salto' : '❌ Sin doble salto';
+          
+          puzzle = {switches:[],doors:[],pads:[],seq:lv.seq||[],seqIndex:0};
+          if(lv.switches) puzzle.switches = lv.switches.map(s=>({...s}));
+          if(lv.doors) puzzle.doors = lv.doors.map(d=>({...d}));
+          if(lv.pads) puzzle.pads = lv.pads.map(p=>({...p,activated:false}));
+          
+          // Conservar el doble salto si ya se obtuvo
+          const hadDoubleJump = player.hasDouble;
+          resetPlayer(hadDoubleJump);
+          
+          // Pero si el nivel es el 3 (índice 2), resetea el powerup para que se pueda coger
+          if (i === 2) {
+              resetPlayer(false);
+              powerLabel.textContent = '❌ Sin doble salto';
+              if (lv.powerup) lv.powerup.active = true;
+          }
         }
         
-        if(isReversed) {
+        function resetPlayer(withPower=false){
+          player = {...playerBase};
+          player.x = 48; 
+          player.y = H-120;
+          player.hasDouble = withPower;
+          player.hasJumpedOnce = false;
+          player.alive = true;
+          player.coyoteTime = 0;
+          player.jumpBuffer = 0;
+        }
+        
+        function drawBG(lv){
+          if(lv.bg==='sunset'){
+            const g = ctx.createLinearGradient(0,0,0,H);
+            g.addColorStop(0,'#ffd6c9'); 
+            g.addColorStop(1,'#fff8f6');
+            ctx.fillStyle = g; 
+            ctx.fillRect(0,0,W,H);
+          } else if (lv.bg==='soft'){
+            const g = ctx.createLinearGradient(0,0,0,H);
+            g.addColorStop(0,'#f8fbff'); 
+            g.addColorStop(1,'#fef8fb');
+            ctx.fillStyle = g; 
+            ctx.fillRect(0,0,W,H);
+          } else {
+            const g = ctx.createLinearGradient(0,0,0,H);
+            g.addColorStop(0,'#fffaf6'); 
+            g.addColorStop(1,'#fff7f8');
+            ctx.fillStyle = g; 
+            ctx.fillRect(0,0,W,H);
+          }
+        }
+        
+        function handleJump(){
+          if(!player.alive) return;
+          const canGroundJump = player.onGround || player.coyoteTime > 0;
+          if(canGroundJump && player.jumpBuffer > 0){
+            player.vy = JUMP_V; 
+            player.onGround=false; 
+            player.hasJumpedOnce=true; 
+            player.jumpBuffer=0; 
+            player.coyoteTime=0;
+            sfx.jump();
+            return;
+          }
+          if(player.hasDouble && player.hasJumpedOnce && player.jumpBuffer > 0){
+            player.vy = DOUBLE_V; 
+            player.hasJumpedOnce=false; 
+            player.jumpBuffer=0;
+            sfx.double();
+            setStatus('Doble salto activado 💖');
+          }
+        }
+        
+        function update(){
+          const lv = levels[currentLevel];
+          
+          const isReversed = !!lv.reversed;
+          let friction = player.onGround ? FRICTION_GROUND : FRICTION_AIR;
+          
+          if(isReversed) {
             if(keys.left) player.vx = Math.min(player.vx + ACCEL, MAX_VX);
             else if(keys.right) player.vx = Math.max(player.vx - ACCEL, -MAX_VX);
             else player.vx *= friction;
-        } else {
+          } else {
             if(keys.left) player.vx = Math.max(player.vx - ACCEL, -MAX_VX);
             else if(keys.right) player.vx = Math.min(player.vx + ACCEL, MAX_VX);
             else player.vx *= friction;
-        }
-
-
-        // jump buffer + coyote timers
-        if(keys.jump){ player.jumpBuffer = JUMP_BUFFER_MAX; keys.jump=false; }
-        if(player.jumpBuffer > 0) player.jumpBuffer -= 1/60;
-        if(player.coyoteTime > 0) player.coyoteTime -= 1/60;
-
-        // Física
-        player.vy += GRAV;
-        player.x += player.vx;
-        player.y += player.vy;
-
-        // Límites
-        if(player.x < 0) player.x = 0;
-        if(player.x + player.w > W) player.x = W - player.w;
-
-        // Piso
-        if(player.y + player.h > H){
-          player.y = H - player.h; player.vy = 0; player.onGround = true; player.hasJumpedOnce=false; player.coyoteTime = COYOTE_MAX;
-        } else {
-          player.onGround = false;
-        }
-        
-        // Actualizar partículas
-        updateParticles();
-
-        // Móviles (velocidad limitada)
-        if(lv.moving){
-          for(const m of lv.moving){
-            const spd = Math.min(m.spd || 0.8, 1.0);
-            if(m.axis==='y'){
-              m.y = (m.y ?? m.from) + spd * (m.dir || 1);
-              if(m.y <= m.from){ m.y = m.from; m.dir = 1; }
-              if(m.y >= m.to){ m.y = m.to; m.dir = -1; }
+          }
+          
+          // jump buffer + coyote timers
+          if(keys.jump){ 
+            player.jumpBuffer = JUMP_BUFFER_MAX; 
+            keys.jump=false; 
+          }
+          if(player.jumpBuffer > 0) player.jumpBuffer -= 1/60;
+          if(player.coyoteTime > 0) player.coyoteTime -= 1/60;
+          
+          // Física
+          player.vy += GRAV;
+          player.x += player.vx;
+          player.y += player.vy;
+          
+          // Límites
+          if(player.x < 0) player.x = 0;
+          if(player.x + player.w > W) {
+            if (lv.exitWin) {
+              sfx.ok();
+              emitParticles(W - 20, H - 40, 15, '#ff6b81');
+              flashMessage(mensajes[currentLevel] || '¡Lo hiciste! ✨', 2600);
+              nextLevel();
+              return;
             } else {
-              m.x = (m.x ?? m.from) + spd * (m.dir || 1);
-              if(m.x <= m.from){ m.x = m.from; m.dir = 1; }
-              if(m.x >= m.to){ m.x = m.to; m.dir = -1; }
+              player.x = W - player.w;
             }
           }
-        }
-
-        // Colisión plataformas
-        const plats = (lv.platforms||[]).concat(lv.moving||[]);
-        for(const p of plats){
-          const isFake = !!p.fake;
-          const collX = player.x + player.w > p.x && player.x < p.x + p.w;
-          const collY = player.y + player.h > p.y && player.y < p.y + p.h;
-          if(collX && collY){
-            const fromAbove = player.vy > 0 && (player.y + player.h - player.vy) <= p.y + 6;
-            if(fromAbove){
-              if(isFake && !p.invisible){ // Plataforma falsa Nivel 4
-                p.y += 16; p.fake = false; // Se cae
-                player.y = p.y - player.h; player.vy = 0; player.onGround = true; player.hasJumpedOnce=false; player.coyoteTime = COYOTE_MAX/2;
-                statusEl.textContent = 'Ups, plataforma falsita — igual te cuido.';
+          
+          // Piso
+          if(player.y + player.h > H){
+            player.y = H - player.h; 
+            player.vy = 0; 
+            player.onGround = true; 
+            player.hasJumpedOnce=false; 
+            player.coyoteTime = COYOTE_MAX;
+          } else {
+            player.onGround = false;
+          }
+          
+          // Partículas
+          updateParticles();
+          
+          // Móviles
+          if(lv.moving){
+            for(const m of lv.moving){
+              const spd = Math.min(m.spd || 0.8, 1.0);
+              if(m.axis==='y'){
+                m.y = (m.y ?? m.from) + spd * (m.dir || 1);
+                if(m.y <= m.from){ m.y = m.from; m.dir = 1; }
+                if(m.y >= m.to){ m.y = m.to; m.dir = -1; }
               } else {
-                // Plataforma normal O invisible (Nivel 6)
-                player.y = p.y - player.h; player.vy = 0; player.onGround = true; player.hasJumpedOnce=false; player.coyoteTime = COYOTE_MAX;
-                if (p.invisible) p.invisible = false; // Se vuelve visible al tocarla
-              }
-            } else {
-              if(player.x + player.w/2 < p.x + p.w/2) player.x = p.x - player.w;
-              else player.x = p.x + p.w;
-              player.vx = 0;
-            }
-          }
-        }
-
-        // Power-up doble salto
-        if(levels[currentLevel].powerup && levels[currentLevel].powerup.active){
-          const px = levels[currentLevel].powerup.x;
-          const py = levels[currentLevel].powerup.y;
-          const dx = (player.x + player.w/2) - px;
-          const dy = (player.y + player.h/2) - py;
-          if(Math.hypot(dx,dy) < 18){
-            player.hasDouble = true; levels[currentLevel].powerup.active = false; powerLabel.textContent='✅ Doble salto';
-            sfx.power();
-            emitParticles(px, py, 15, '#ff6b81'); // Partículas de corazón
-            flashMessage('Corazón doble salto activado 💖');
-          }
-        }
-
-        // Puzzles
-        if(lv.type==='puzzle-switch'){
-          for(const s of puzzle.switches){
-            if(player.x + player.w > s.x && player.x < s.x + s.w && player.y + player.h > s.y && player.y < s.y + s.h){
-              if(!s.active){ s.active = true; statusEl.textContent='Interruptor activado'; }
-            }
-          }
-          if(puzzle.switches.length && puzzle.switches.every(sw=>sw.active)){
-            for(const d of puzzle.doors) d.closed = false;
-          }
-          for(const d of puzzle.doors){
-            if(d.closed){
-              if(player.x + player.w > d.x && player.x < d.x + d.w && player.y + player.h > d.y && player.y < d.y + d.h){
-                if(player.x < d.x) player.x = d.x - player.w; else player.x = d.x + d.w; player.vx = 0;
-                statusEl.textContent = 'Puerta cerrada — activa el interruptor.';
+                m.x = (m.x ?? m.from) + spd * (m.dir || 1);
+                if(m.x <= m.from){ m.x = m.from; m.dir = 1; }
+                if(m.x >= m.to){ m.x = m.to; m.dir = -1; }
               }
             }
           }
-        }
-
-        if(lv.type==='puzzle-seq'){
-          for(const p of puzzle.pads){
-            if(player.x + player.w > p.x && player.x < p.x + p.w && player.y + player.h > p.y && player.y < p.y + p.h){
-              if(!p.activated){
-                const expectedOrder = puzzle.seq[puzzle.seqIndex];
-                const padIndex = puzzle.pads.findIndex(pp=>pp.order===p.order);
-                if(padIndex === expectedOrder){
-                  p.activated = true; puzzle.seqIndex++;
-                  statusEl.textContent = `Correcto (${puzzle.seqIndex}/${puzzle.seq.length})`;
-                  if(puzzle.seqIndex >= puzzle.seq.length){
-                    flashMessage('Secuencia completa ✨');
-                  }
+          
+          // Colisión plataformas
+          const plats = (lv.platforms||[]).concat(lv.moving||[]);
+          for(const p of plats){
+            const isFake = !!p.fake;
+            const collX = player.x + player.w > p.x && player.x < p.x + p.w;
+            const collY = player.y + player.h > p.y && player.y < p.y + p.h;
+            if(collX && collY){
+              const fromAbove = player.vy > 0 && (player.y + player.h - player.vy) <= p.y + 6;
+              if(fromAbove){
+                if(isFake && !p.invisible){
+                  p.y += 16; 
+                  p.fake = false;
+                  player.y = p.y - player.h; 
+                  player.vy = 0; 
+                  player.onGround = true; 
+                  player.hasJumpedOnce=false; 
+                  player.coyoteTime = COYOTE_MAX/2;
+                  setStatus('Ups, plataforma falsita — igual te cuido.');
                 } else {
-                  // TROLL 5: Secuencia incorrecta
-                  puzzle.pads.forEach(pp=>pp.activated=false);
-                  puzzle.seqIndex = 0;
-                  statusEl.textContent = 'Orden incorrecto — empieza otra vez (tranqui).';
+                  player.y = p.y - player.h; 
+                  player.vy = 0; 
+                  player.onGround = true; 
+                  player.hasJumpedOnce=false; 
+                  player.coyoteTime = COYOTE_MAX;
+                  if (p.invisible) {
+                    p.invisible = false;
+                    setStatus('¡Ahí estaba! 🤍');
+                  }
                 }
+              } else {
+                // Colisión lateral
+                if(player.x + player.w/2 < p.x + p.w/2) player.x = p.x - player.w;
+                else player.x = p.x + p.w;
+                player.vx = 0;
               }
             }
           }
-        }
-
-        // Spikes (hitbox)
-        for(const s of (lv.spikes||[])){
-            const spikeHit = (player.x + player.w > s.x + 4 && player.x < s.x + s.w - 4); // Hitbox X (para objetos únicos)
-            
-            if(s.isFloor){
-                // Lógica para pinchos de suelo (múltiples segmentos)
-                const segments = Math.max(1, Math.floor(s.w/20));
-                const step = s.w / segments;
-                for(let i=0;i<segments;i++){
-                    const sx = s.x + i*step;
-                    const spikeTop = L-20 - 10; // Margen de perdón de 10px
-                    const overlapX = player.x + player.w > sx && player.x < sx + step;
-                    const overlapY = player.y + player.h > spikeTop;
-                    if(overlapX && overlapY){
-                        sfx.hit();
-                        tries++; triesLabel.textContent = tries;
-                        levelTries[currentLevel]++; // Incrementar contador de muerte del nivel
-                        emitAsh(player.x, player.y); // Efecto "Ash"
-                        
-                        // TROLL 3: Nivel 8 - Meta Oculta
-                        if(currentLevel === 7 && levels[currentLevel].goal.hidden){
-                          levels[currentLevel].goal.hidden = false;
-                          flashMessage('¡Apareció la meta! (Tenías que morir 🤍)', 2000);
-                        }
-                        
-                        loadLevel(currentLevel);
-                        statusEl.textContent = 'Te caíste — tranqui, prueba otra vez.';
-                        return;
-                    }
-                }
-            } else if(s.isStarTroll) {
-                // Lógica para Estrella Troll (Nivel 2)
-                const spikeY = s.y - s.h; // Y del tope de la killzone
-                const overlapY = player.y + player.h > spikeY && player.y < s.y; 
-                if(spikeHit && overlapY){
-                    sfx.hit();
-                    tries++; triesLabel.textContent = tries;
-                    levelTries[currentLevel]++; // Incrementar contador de muerte del nivel
-                    emitAsh(player.x, player.y); // Efecto "Ash"
-                    loadLevel(currentLevel);
-                    flashMessage('¡La estrella troll! ¡Me mató!');
-                    return;
-                }
+          
+          // Power-up doble salto
+          if(lv.powerup && lv.powerup.active){
+            const px = lv.powerup.x;
+            const py = lv.powerup.y;
+            const dx = (player.x + player.w/2) - px;
+            const dy = (player.y + player.h/2) - py;
+            if(Math.hypot(dx,dy) < 18){
+              player.hasDouble = true; 
+              lv.powerup.active = false; 
+              powerLabel.textContent='✅ Doble salto';
+              sfx.power();
+              emitParticles(px, py, 15, '#ff6b81');
+              flashMessage('Corazón doble salto activado 💖');
             }
-        }
-
-        // Meta/Win condition check
-        const goal = levels[currentLevel].goal;
-
-        // TROLL 14: Win by Exit (right side of the screen)
-        if (lv.exitWin && player.x + player.w >= W - 4) { // 4px margin
-            sfx.ok();
-            emitParticles(W - 20, H - 40, 15, '#ff6b81'); // Partículas de corazón al ganar
-            flashMessage(mensajes[currentLevel] || '¡Lo hiciste! ✨', 2600);
-            nextLevel();
-            return;
-        }
-
-        // Standard Goal Check (Star)
-        if(goal && !goal.hidden && !goal.distraction) {
-          const gx = goal.x;
-          const gy = goal.y;
-          const dd = Math.hypot((player.x+player.w/2)-gx, (player.y+player.h/2)-gy);
-          if(dd < 20){
-            sfx.ok();
-            emitParticles(gx, gy, 15, '#ffd86b'); // Partículas de estrella
-            flashMessage(mensajes[currentLevel] || '¡Lo hiciste! ✨', 2600); // Duración aumentada
-            nextLevel();
-            return;
-          }
-        }
-
-
-        // Ejecuta salto si hay buffer activo
-        handleJump();
-      }
-
-      function draw(){
-        const lv = levels[currentLevel];
-        ctx.clearRect(0,0,W,H);
-        drawBG(lv);
-
-        // Piso
-        ctx.fillStyle = '#fff'; ctx.fillRect(0,H-60,W,60);
-
-        // Plataformas
-        const plats = (lv.platforms||[]).concat(lv.moving||[]);
-        for(const p of plats){
-          let fill = '#fff';
-          let stroke = '#e6d4d6';
-
-          if (p.fake) { // Nivel 4 (Falsa que cae)
-              fill = '#fff8'; // Semi-transparente
-              stroke = '#ffc0c0'; // Borde rosa
           }
           
-          if (p.invisible) { // Nivel 6 y 9 (Invisible)
-              fill = 'rgba(255, 255, 255, 0.05)'; // Casi invisible
-              stroke = 'rgba(230, 212, 214, 0.1)'; // Borde casi invisible
+          // Spikes
+          for(const s of (lv.spikes||[])){
+            if(s.isFloor){
+              const spikeTop = L-20 - 10;
+              const overlapX = player.x + player.w > s.x && player.x < s.x + s.w;
+              const overlapY = player.y + player.h > spikeTop;
+              if(overlapX && overlapY){
+                dieAndReload(true);
+                return;
+              }
+            } else if(s.isStarTroll) {
+              const spikeY = s.y - s.h;
+              const spikeHitX = (player.x + player.w > s.x + 4 && player.x < s.x + s.w - 4);
+              const overlapY = player.y + player.h > spikeY && player.y < s.y;
+              if(spikeHitX && overlapY){
+                dieAndReload(false, '¡La estrella troll! ¡Me mató!');
+                return;
+              }
+            }
           }
-
-          rr(p.x,p.y,p.w,p.h,6, fill, stroke);
           
-          // Punto negro indicador (SOLO Nivel 4, NO Nivel 6 o 9)
-          if(p.fake && !p.invisible){ 
-            ctx.fillStyle = '#382f2f'; // Punto negro
-            ctx.beginPath();
-            ctx.arc(p.x + p.w/2, p.y + p.h/2, 2, 0, Math.PI * 2);
-            ctx.fill();
+          // Win condition
+          const goal = lv.goal;
+          if(goal && !goal.hidden && !goal.distraction && !goal.locked) {
+            const gx = goal.x;
+            const gy = goal.y;
+            const dd = Math.hypot((player.x+player.w/2)-gx, (player.y+player.h/2)-gy);
+            if(dd < 20){
+              sfx.ok();
+              emitParticles(gx, gy, 15, '#ffd86b');
+              flashMessage(mensajes[currentLevel] || '¡Lo hiciste! ✨', 2600);
+              nextLevel();
+              return;
+            }
+          }
+          
+          handleJump();
+        }
+        
+        function draw(){
+          const lv = levels[currentLevel];
+          ctx.clearRect(0,0,W,H);
+          drawBG(lv);
+          
+          // Piso
+          ctx.fillStyle = '#fff'; 
+          ctx.fillRect(0,H-60,W,60);
+          
+          // Plataformas
+          const plats = (lv.platforms||[]).concat(lv.moving||[]);
+          for(const p of plats){
+            let fill = '#fff', stroke = '#e6d4d6';
+            if (p.fake) { fill = '#fff8'; stroke = '#ffc0c0'; }
+            if (p.invisible) { fill = 'rgba(255, 255, 255, 0.05)'; stroke = 'rgba(230, 212, 214, 0.1)'; }
+            rr(p.x,p.y,p.w,p.h,6, fill, stroke);
+            if(p.fake && !p.invisible){
+              ctx.fillStyle = '#c33';
+              ctx.font = 'bold 14px system-ui';
+              ctx.textAlign='center';
+              ctx.textBaseline='middle';
+              ctx.fillText('?', p.x + p.w/2, p.y + p.h/2 + 1);
+            }
+          }
+          
+          // Partículas
+          drawParticles();
+          
+          // Spikes
+          for(const s of (lv.spikes||[])){
+            if(s.isFloor){
+              const segments = Math.max(1, Math.floor(s.w/20));
+              for(let i=0;i<segments;i++){
+                drawSpike(s.x + i*(s.w/segments), L-20, 20, 16);
+              }
+            } else if(s.isStarTroll) {
+              drawStar(s.x + s.w/2, s.y - s.h/2, 12);
+            }
+          }
+          
+          // Power-up
+          if(lv.powerup && lv.powerup.active){
+            drawHeart(lv.powerup.x, lv.powerup.y, 10);
+          }
+          
+          // Meta (si no está oculta)
+          const goal = lv.goal;
+          if(goal && !goal.hidden) {
+            drawStar(goal.x, goal.y, 10);
+            if (goal.distraction) {
+              ctx.strokeStyle = '#c33'; 
+              ctx.lineWidth = 3;
+              ctx.beginPath();
+              ctx.moveTo(goal.x - 10, goal.y - 10); 
+              ctx.lineTo(goal.x + 10, goal.y + 10);
+              ctx.moveTo(goal.x + 10, goal.y - 10); 
+              ctx.lineTo(goal.x - 10, goal.y + 10);
+              ctx.stroke(); 
+              ctx.lineWidth = 1;
+            }
+          }
+          
+          // Player
+          if(player.alive) {
+            rr(player.x, player.y, player.w, player.h, 6, '#fff', '#e6d4d6');
+            ctx.font = '20px system-ui'; 
+            ctx.textAlign='center'; 
+            ctx.textBaseline='middle';
+            ctx.fillStyle = '#ff6b81'; 
+            ctx.fillText('🤍', player.x + player.w/2, player.y + player.h/2);
           }
         }
         
-        // Dibujar Partículas
-        drawParticles();
-
-        // Spikes
-        for(const s of (lv.spikes||[])){
-          if(s.isFloor){
-            const segments = Math.max(1, Math.floor(s.w/20));
-            for(let i=0;i<segments;i++){
-              drawSpike(s.x + i*(s.w/segments), L-20, 20, 16);
-            }
-          } else if(s.isStarTroll) {
-            // Dibujar como Estrella Troll
-            drawStar(s.x + s.w/2, s.y - s.h/2, 12); 
-          }
-        }
-
-        // Switches/puertas
-        if(lv.type==='puzzle-switch'){
-          for(const sw of puzzle.switches){
-            rr(sw.x, sw.y, sw.w, sw.h, 4, sw.active ? '#ffd86b' : '#ddd', '#c8b0b4');
-            ctx.fillStyle='#5b3336'; ctx.font='12px system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle';
-            ctx.fillText(sw.active?'ON':'OFF', sw.x+sw.w/2, sw.y+sw.h/2);
-          }
-          for(const d of puzzle.doors){
-            if(d.closed) rr(d.x,d.y,d.w,d.h,6,'#8b5a5f','#6a3f42');
-          }
-        }
-
-        // Pads
-        if(lv.type==='puzzle-seq'){
-          for(const p of puzzle.pads){
-            rr(p.x,p.y,p.w,p.h,6, p.activated ? p.color : '#eee', '#cfcfcf');
-            ctx.fillStyle = '#fff'; ctx.font='14px system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle';
-            ctx.fillText('●', p.x + p.w/2, p.y + p.h/2);
-          }
-          ctx.fillStyle = '#5b3336'; ctx.font='13px system-ui';
-          ctx.fillText(`Secuencia: ${puzzle.seqIndex}/${(puzzle.seq||[]).length}`, 10, 20);
-        }
-
-        // Power-up
-        if(levels[currentLevel].powerup && levels[currentLevel].powerup.active){
-          drawHeart(levels[currentLevel].powerup.x, levels[currentLevel].powerup.y, 10);
-        }
-
-        // Meta (TROLL 8 y DISTRACCIÓN 14)
-        if(levels[currentLevel].goal && !levels[currentLevel].goal.hidden) {
-          drawStar(levels[currentLevel].goal.x, levels[currentLevel].goal.y, 10);
-        }
-
-        // Player
-        if(player.alive) {
-          rr(player.x, player.y, player.w, player.h, 6, '#fff', '#e6d4d6');
-          ctx.font = '20px system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillStyle = '#ff6b81'; ctx.fillText('🤍', player.x + player.w/2, player.y + player.h/2);
-        }
-      }
-
-      /* --- CAMBIO 2: 'nextLevel' MODIFICADO CON POEMA --- */
-      function nextLevel(){
-        currentLevel++;
-        if(currentLevel >= levels.length){
-          // --- Poema Añadido ---
-          const poemaFinal = `Llegaste al final, mi vida. 🤍
+        function nextLevel(){
+          currentLevel++;
+          if(currentLevel >= levels.length){
+            const poemaFinal = `Llegaste al final, mi vida. 🤍
 
 Pasaste el troll, pasaste el miedo.
 Como en el juego, como en la vida,
@@ -1140,67 +1864,104 @@ Gracias por jugar, y gracias por quedarte.
 
 Eres mi todo, hoy y siempre.
 — Samuel`;
+            showSecret(poemaFinal);
+            const modalTitle = document.querySelector('#secretModal h3');
+            if (modalTitle) modalTitle.textContent = 'Un Poema Para Ti ✨';
+            
+            setTimeout(()=>{ 
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
+            }, 500);
+            currentLevel = 0;
+            levelTries = {};
+            tries = 0;
+            triesLabel.textContent = tries;
+          }
           
-          // Usamos el modal de secretos para mostrar el poema
-          showSecret(poemaFinal); 
-          
-          // Opcional: Cambiar el título del modal para que sea especial
-          const modalTitle = document.querySelector('#secretModal h3');
-          if (modalTitle) modalTitle.textContent = 'Un Poema Para Ti ✨';
-          // --- Fin de la adición ---
-
-          setTimeout(()=>{ window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }, 500);
-          currentLevel = 0;
-          levelTries = {}; // Reiniciar contador de muertes al terminar
-        } else {
+          // Carga el siguiente nivel, manteniendo el doble salto si ya lo tenía
+          const hadDoubleJump = player.hasDouble;
           loadLevel(currentLevel);
+          player.hasDouble = hadDoubleJump;
+          if (player.hasDouble) {
+              powerLabel.textContent = '✅ Doble salto';
+          }
         }
-      }
-      
-      function dieAndReload() {
+        
+        function dieAndReload(inFloor=false, flashText=null) {
           sfx.hit();
-          tries++; triesLabel.textContent = tries;
+          tries++; 
+          triesLabel.textContent = tries;
           if (!levelTries[currentLevel]) levelTries[currentLevel] = 0;
-          levelTries[currentLevel]++; // Incrementar contador de muerte del nivel
-          emitAsh(player.x, player.y); // Efecto "Ash"
-          player.alive = false; // Detener al jugador
-
-          // TROLL 8: Nivel 8 - Meta Oculta
+          levelTries[currentLevel]++;
+          emitAsh(player.x, player.y);
+          player.alive = false;
+          
+          // Nivel 8 — Meta oculta aparece al morir
           if(currentLevel === 7 && levels[currentLevel].goal.hidden){
             levels[currentLevel].goal.hidden = false;
             flashMessage('¡Apareció la meta! (Tenías que morir 🤍)', 2000);
           }
           
-          // Esperar un momento para ver las partículas antes de recargar
+          if (flashText) flashMessage(flashText, 1400);
+          
           setTimeout(() => {
-              loadLevel(currentLevel);
-              statusEl.textContent = 'Te caíste — tranqui, prueba otra vez.';
-          }, 300); // 300ms de retraso
+            const hadDoubleJump = player.hasDouble;
+            loadLevel(currentLevel);
+            player.hasDouble = hadDoubleJump;
+            if (player.hasDouble) {
+              powerLabel.textContent = '✅ Doble salto';
+            }
+            setStatus('Te caíste — tranqui, prueba otra vez.');
+          }, 300);
+        }
+        
+        // Bucle principal optimizado
+        let running = true;
+        
+        document.addEventListener('visibilitychange', () => {
+          running = !document.hidden;
+        });
+        
+        function loop(){
+          if(running){
+            if(player.alive) update();
+            draw();
+          }
+          requestAnimationFrame(loop);
+        }
+        
+        // Eventos de UI
+        document.getElementById('restartBtn').addEventListener('click', () => {
+          dieAndReload(false);
+          setStatus('Reiniciado — respira y dale otra vez.');
+        });
+        
+        document.getElementById('nextBtn').addEventListener('click', () => {
+          // Botón troll
+          sfx.hit();
+          flashMessage('¡Ese botón es trampa! JSKJSKA', 1400);
+          dieAndReload(false, '¡No uses el botón de saltar nivel! tramposa 🤍');
+        });
+        
+        // Iniciar juego
+        loadLevel(0);
+        initTouchControls();
+        loop();
+      })();
+      
+      // ========== INICIALIZACIÓN GENERAL ==========
+      preloadCriticalResources();
+      initSectionNavigation();
+      
+      // Scroll inicial suave
+      setTimeout(() => { 
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+      }, 100);
+      
+      // Mejorar rendimiento en dispositivos táctiles
+      if ('ontouchstart' in window) {
+        document.documentElement.style.touchAction = 'manipulation';
       }
-
-      function loop(){ 
-        if(player.alive) update(); 
-        draw(); 
-        requestAnimationFrame(loop); 
-      }
-
-      document.getElementById('restartBtn').addEventListener('click', ()=>{
-        dieAndReload();
-        statusEl.textContent = 'Reiniciado — respira y dale otra vez.';
-      });
-      document.getElementById('nextBtn').addEventListener('click', ()=>{
-        // TROLL: Botón que no funciona
-        flashMessage('Primero toma la estrellita ✨', 1200);
-      });
-
-      // Init
-      loadLevel(0);
-      loop();
-    })();
-
-    // Scroll inicial arriba
-    setTimeout(()=>{ window.scrollTo({ top: 0 }); }, 80);
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
